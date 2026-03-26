@@ -1,10 +1,16 @@
 import type { VercelRequest } from '@vercel/node';
 
-const JWT_SECRET = process.env.JWT_SECRET;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+export const getJwtSecret = () => {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) throw new Error('JWT_SECRET environment variable is required');
+  return secret;
+};
 
-if (!JWT_SECRET) throw new Error('JWT_SECRET environment variable is required');
-if (!ADMIN_PASSWORD) throw new Error('ADMIN_PASSWORD environment variable is required');
+export const getAdminPassword = () => {
+  const pw = process.env.ADMIN_PASSWORD;
+  if (!pw) throw new Error('ADMIN_PASSWORD environment variable is required');
+  return pw;
+};
 
 export const verifyToken = async (req: VercelRequest): Promise<boolean> => {
   const authHeader = req.headers.authorization;
@@ -13,7 +19,7 @@ export const verifyToken = async (req: VercelRequest): Promise<boolean> => {
   if (!token) return false;
   try {
     const jwt = await import('jsonwebtoken');
-    jwt.default.verify(token, JWT_SECRET);
+    jwt.default.verify(token, getJwtSecret());
     return true;
   } catch {
     return false;
@@ -22,7 +28,5 @@ export const verifyToken = async (req: VercelRequest): Promise<boolean> => {
 
 export const createToken = async (): Promise<string> => {
   const jwt = await import('jsonwebtoken');
-  return jwt.default.sign({ admin: true }, JWT_SECRET, { expiresIn: '2h' });
+  return jwt.default.sign({ admin: true }, getJwtSecret(), { expiresIn: '2h' });
 };
-
-export { ADMIN_PASSWORD };

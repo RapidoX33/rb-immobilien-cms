@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createToken, ADMIN_PASSWORD } from '../_auth.js';
+import { createToken, getAdminPassword } from '../_auth.js';
 
 const loginAttempts = new Map<string, { count: number; lastAttempt: number }>();
 const MAX_ATTEMPTS = 5;
@@ -53,10 +53,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Password required' });
   }
 
-  if (timingSafeEqual(password, ADMIN_PASSWORD!)) {
-    loginAttempts.delete(ip);
-    const token = await createToken();
-    return res.json({ token });
+  try {
+    const adminPw = getAdminPassword();
+    if (timingSafeEqual(password, adminPw)) {
+      loginAttempts.delete(ip);
+      const token = await createToken();
+      return res.json({ token });
+    }
+  } catch (e: any) {
+    return res.status(500).json({ error: e.message || 'Server error' });
   }
 
   recordAttempt(ip);
