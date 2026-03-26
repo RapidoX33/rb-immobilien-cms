@@ -26,15 +26,17 @@ export default function Kaufobjekte() {
     <>
       {/* Hero */}
       <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center overflow-hidden">
-        <EditableImage
-          src={content.kaufHeroImage}
-          onSave={(url) => handleSave('kaufHeroImage', url)}
-          className="absolute inset-0 w-full h-full"
-          imgClassName="w-full h-full object-cover"
-          alt="Kaufobjekte"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/60 via-brand-dark/40 to-brand-dark/70" />
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <div className="absolute inset-0 w-full h-full">
+          <EditableImage
+            src={content.kaufHeroImage}
+            onSave={(url) => handleSave('kaufHeroImage', url)}
+            className="w-full h-full"
+            imgClassName="w-full h-full object-cover"
+            alt="Kaufobjekte"
+          />
+        </div>
+        <div className="absolute inset-0 bg-brand-dark/70" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,7 +84,7 @@ export default function Kaufobjekte() {
                         referrerPolicy="no-referrer"
                       />
                       {/* Category Badge */}
-                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold text-brand-dark tracking-wide uppercase">
+                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold text-brand-dark tracking-wide">
                         {property.category}
                       </div>
                       {/* Price Badge */}

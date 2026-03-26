@@ -60,7 +60,7 @@ export function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={cn(
-                  'relative px-4 py-2 text-sm font-medium tracking-wide uppercase transition-colors duration-300',
+                  'relative px-4 py-2 text-[15px] font-medium tracking-wide transition-colors duration-300',
                   isActive(link.href)
                     ? 'text-brand-red'
                     : 'text-brand-dark hover:text-brand-red'
@@ -105,7 +105,7 @@ export function Navbar() {
                   key={link.href}
                   to={link.href}
                   className={cn(
-                    'px-4 py-3 rounded-lg text-sm font-medium tracking-wide uppercase transition-colors',
+                    'px-4 py-3 rounded-xl text-base font-medium transition-colors',
                     isActive(link.href)
                       ? 'text-brand-red bg-brand-red/5'
                       : 'text-brand-dark hover:text-brand-red hover:bg-gray-50'

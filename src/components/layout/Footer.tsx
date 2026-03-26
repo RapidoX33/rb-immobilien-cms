@@ -32,12 +32,12 @@ export function Footer() {
 
           {/* Standort Column */}
           <div className="space-y-4">
-            <h4 className="text-sm font-bold tracking-widest uppercase text-white/80">Standort</h4>
-            <div className="text-gray-400 text-sm space-y-1">
+            <h4 className="text-lg font-display font-semibold text-white">Standort</h4>
+            <div className="text-gray-400 space-y-1">
               <EditableText
                 value={content.companyName}
                 onSave={(v) => handleSave('companyName', v)}
-                className="font-semibold text-white block"
+                className="text-gray-400 block"
                 as="p"
               />
               <EditableText
@@ -57,26 +57,26 @@ export function Footer() {
 
           {/* Kontakt Column */}
           <div className="space-y-4">
-            <h4 className="text-sm font-bold tracking-widest uppercase text-white/80">Kontakt</h4>
-            <div className="text-gray-400 text-sm space-y-1">
-              <p>
-                Tel:{' '}
+            <h4 className="text-lg font-display font-semibold text-white">Kontakt</h4>
+            <div className="text-gray-400 space-y-2">
+              <p className="flex items-center gap-2">
+                <span className="text-brand-red">T</span>
                 <EditableText
                   value={content.footerPhone}
                   onSave={(v) => handleSave('footerPhone', v)}
                   className="text-gray-400"
                 />
               </p>
-              <p>
-                Fax:{' '}
+              <p className="flex items-center gap-2">
+                <span className="text-brand-red">F</span>
                 <EditableText
                   value={content.footerFax}
                   onSave={(v) => handleSave('footerFax', v)}
                   className="text-gray-400"
                 />
               </p>
-              <p>
-                E-Mail:{' '}
+              <p className="flex items-center gap-2">
+                <span className="text-brand-red">E</span>
                 <EditableText
                   value={content.footerEmail}
                   onSave={(v) => handleSave('footerEmail', v)}

@@ -32,14 +32,16 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center">
-        <EditableImage
-          src={content.heroImage}
-          onSave={(url) => handleSave('heroImage', url)}
-          className="absolute inset-0 w-full h-full"
-          imgClassName="w-full h-full object-cover"
-          alt="RB Immobilien Hero"
-        />
+      <section className="relative w-full min-h-[85vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 w-full h-full">
+          <EditableImage
+            src={content.heroImage}
+            onSave={(url) => handleSave('heroImage', url)}
+            className="w-full h-full"
+            imgClassName="w-full h-full object-cover"
+            alt="RB Immobilien Hero"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/70 to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
@@ -195,7 +197,7 @@ export default function Home() {
                 href={content.newsLinkUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-8 bg-brand-red hover:bg-red-700 text-white px-6 py-3 rounded-full font-semibold transition-colors"
+                className="inline-flex items-center gap-2 mt-8 bg-brand-dark hover:bg-gray-800 text-white px-6 py-3 rounded-full font-semibold transition-colors"
               >
                 <EditableText
                   value={content.newsLinkText}

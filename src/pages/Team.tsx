@@ -29,15 +29,17 @@ export default function Team() {
     <>
       {/* Hero Section */}
       <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center">
-        <EditableImage
-          src={content.teamHeroImage}
-          onSave={(url) => handleSave('teamHeroImage', url)}
-          className="absolute inset-0 w-full h-full"
-          imgClassName="w-full h-full object-cover"
-          alt="Team Hero"
-        />
-        <div className="absolute inset-0 bg-brand-dark/60" />
-        <div className="relative z-10 text-center px-6">
+        <div className="absolute inset-0 w-full h-full">
+          <EditableImage
+            src={content.teamHeroImage}
+            onSave={(url) => handleSave('teamHeroImage', url)}
+            className="w-full h-full"
+            imgClassName="w-full h-full object-cover"
+            alt="Team Hero"
+          />
+        </div>
+        <div className="absolute inset-0 bg-brand-dark/70" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

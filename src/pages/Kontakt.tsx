@@ -40,15 +40,17 @@ export default function Kontakt() {
     <>
       {/* Hero Section */}
       <section className="relative h-[40vh] flex items-center justify-center">
-        <EditableImage
-          src={content.contactHeroImage}
-          onSave={(url) => handleSave('contactHeroImage', url)}
-          className="absolute inset-0 w-full h-full"
-          imgClassName="w-full h-full object-cover"
-          alt="Kontakt"
-        />
-        <div className="absolute inset-0 bg-brand-dark/60" />
-        <div className="relative z-10 text-center text-white">
+        <div className="absolute inset-0 w-full h-full">
+          <EditableImage
+            src={content.contactHeroImage}
+            onSave={(url) => handleSave('contactHeroImage', url)}
+            className="w-full h-full"
+            imgClassName="w-full h-full object-cover"
+            alt="Kontakt"
+          />
+        </div>
+        <div className="absolute inset-0 bg-brand-dark/70" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center text-white">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

@@ -97,10 +97,10 @@ export default function ObjektDetail() {
             {backLabel}
           </Link>
           <div className="flex items-center gap-2">
-            <span className="bg-brand-red/10 text-brand-red px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
+            <span className="bg-brand-red/10 text-brand-red px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
               {property.type === 'mieten' ? 'Miete' : 'Kauf'}
             </span>
-            <span className="bg-brand-light text-brand-dark px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
+            <span className="bg-brand-light text-brand-dark px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
               {property.category}
             </span>
           </div>
