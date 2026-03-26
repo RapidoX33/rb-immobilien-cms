@@ -53,7 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Password required' });
   }
 
-  if (timingSafeEqual(password, ADMIN_PASSWORD)) {
+  if (timingSafeEqual(password, ADMIN_PASSWORD!)) {
     loginAttempts.delete(ip);
     const token = await createToken();
     return res.json({ token });
