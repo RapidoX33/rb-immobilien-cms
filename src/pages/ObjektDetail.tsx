@@ -104,7 +104,7 @@ export default function ObjektDetail() {
   return (
     <>
       {/* Top Nav Bar */}
-      <div className="bg-white border-b border-gray-100 sticky top-[96px] z-40">
+      <div className="bg-white border-b border-gray-100 pt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <Link
             to={backLink}
@@ -126,37 +126,48 @@ export default function ObjektDetail() {
 
       {/* Image Gallery */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[40vh] md:h-[60vh]">
-          {/* Main Image */}
-          <div className="md:col-span-2 relative rounded-3xl overflow-hidden group">
-            <FadeImg
-              src={property.images[0]}
-              alt={property.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          </div>
-          {/* Side Images */}
-          <div className="hidden md:grid grid-rows-2 gap-4">
-            {property.images[1] && (
-              <div className="relative rounded-3xl overflow-hidden group">
+        {property.images.length >= 3 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Main Image */}
+            <div className="md:col-span-2 relative rounded-3xl overflow-hidden group aspect-[16/10]">
+              <FadeImg
+                src={property.images[0]}
+                alt={property.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            {/* Side Images */}
+            <div className="hidden md:grid grid-rows-2 gap-4">
+              <div className="relative rounded-3xl overflow-hidden group aspect-[16/10]">
                 <FadeImg
                   src={property.images[1]}
                   alt={`${property.title} 2`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-            )}
-            {property.images[2] && (
-              <div className="relative rounded-3xl overflow-hidden group">
+              <div className="relative rounded-3xl overflow-hidden group aspect-[16/10]">
                 <FadeImg
                   src={property.images[2]}
                   alt={`${property.title} 3`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-            )}
+            </div>
           </div>
-        </div>
+        ) : property.images.length === 2 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="relative rounded-3xl overflow-hidden group aspect-[16/10]">
+              <FadeImg src={property.images[0]} alt={property.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            </div>
+            <div className="relative rounded-3xl overflow-hidden group aspect-[16/10]">
+              <FadeImg src={property.images[1]} alt={`${property.title} 2`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            </div>
+          </div>
+        ) : (
+          <div className="relative rounded-3xl overflow-hidden group aspect-[16/9] max-h-[500px]">
+            <FadeImg src={property.images[0]} alt={property.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+        )}
       </section>
 
       {/* Main Content + Sidebar */}
