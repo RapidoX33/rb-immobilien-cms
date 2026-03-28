@@ -102,77 +102,51 @@ export default function Team() {
                     className="text-brand-red font-medium mt-1"
                   />
 
-                  {/* Qualifications - always 2 slots, flex-grow pushes contact down */}
-                  <div className="mt-3 flex-grow">
-                    <ul className="space-y-1">
-                      {Array.from({ length: 2 }, (_, qi) => {
-                        const qual = member.qualifications[qi] || '';
-                        const hasValue = qual.trim() !== '';
-                        // Public: hide empty slots. Admin: show all slots.
-                        if (!isAdmin && !hasValue) return <li key={qi} className="text-sm invisible">&nbsp;</li>;
-                        return (
-                          <li key={qi} className="text-sm text-brand-gray">
+                  {/* 2 qualification lines - always present */}
+                  <ul className="mt-3 space-y-1">
+                    {[0, 1].map((qi) => {
+                      const qual = member.qualifications[qi] || '';
+                      return (
+                        <li key={qi} className="text-sm text-brand-gray min-h-[1.25rem]">
+                          {(qual.trim() || isAdmin) ? (
                             <EditableText
                               value={qual}
                               onSave={(v) => {
-                                const newQuals = Array.from({ length: 2 }, (_, i) => member.qualifications[i] || '');
+                                const newQuals = [member.qualifications[0] || '', member.qualifications[1] || ''];
                                 newQuals[qi] = v;
                                 updateMember(member.id, 'qualifications', newQuals.filter(q => q.trim() !== ''));
                               }}
                               as="span"
                             />
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
+                          ) : <span>&nbsp;</span>}
+                        </li>
+                      );
+                    })}
+                  </ul>
 
-                  {/* Contact */}
+                  {/* Line */}
                   <div className="mt-4 pt-4 border-t border-gray-100 space-y-2">
-                    <a
-                      href={`tel:${member.phone}`}
-                      className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
-                    >
-                      <Phone className="w-4 h-4 flex-shrink-0 text-brand-red" />
-                      <EditableText
-                        value={member.phone}
-                        onSave={(v) => updateMember(member.id, 'phone', v)}
-                        className="text-brand-red"
-                      />
-                    </a>
-                    {member.mobile && member.mobile.trim() !== '' ? (
-                      <a
-                        href={`tel:${member.mobile}`}
-                        className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
-                      >
-                        <Smartphone className="w-4 h-4 flex-shrink-0 text-brand-red" />
-                        <EditableText
-                          value={member.mobile}
-                          onSave={(v) => updateMember(member.id, 'mobile', v)}
-                          className="text-brand-red"
-                        />
+                    {/* Phone - always shown */}
+                    {member.phone && (
+                      <a href={`tel:${member.phone}`} className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors">
+                        <Phone className="w-4 h-4 flex-shrink-0" />
+                        <EditableText value={member.phone} onSave={(v) => updateMember(member.id, 'phone', v)} className="text-brand-red" />
                       </a>
-                    ) : isAdmin ? (
-                      <div className="flex items-center gap-3 text-sm text-brand-gray">
-                        <Smartphone className="w-4 h-4 flex-shrink-0 text-brand-red/40" />
-                        <EditableText
-                          value=""
-                          onSave={(v) => updateMember(member.id, 'mobile', v)}
-                          className="text-brand-gray"
-                        />
-                      </div>
-                    ) : null}
-                    <a
-                      href={`mailto:${member.email}`}
-                      className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
-                    >
-                      <Mail className="w-4 h-4 flex-shrink-0 text-brand-red" />
-                      <EditableText
-                        value={member.email}
-                        onSave={(v) => updateMember(member.id, 'email', v)}
-                        className="text-brand-red"
-                      />
-                    </a>
+                    )}
+                    {/* Mobile - only if filled */}
+                    {member.mobile && member.mobile.trim() !== '' && (
+                      <a href={`tel:${member.mobile}`} className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors">
+                        <Smartphone className="w-4 h-4 flex-shrink-0" />
+                        <EditableText value={member.mobile} onSave={(v) => updateMember(member.id, 'mobile', v)} className="text-brand-red" />
+                      </a>
+                    )}
+                    {/* Email - always shown */}
+                    {member.email && (
+                      <a href={`mailto:${member.email}`} className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors">
+                        <Mail className="w-4 h-4 flex-shrink-0" />
+                        <EditableText value={member.email} onSave={(v) => updateMember(member.id, 'email', v)} className="text-brand-red" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </motion.div>
