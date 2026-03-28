@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative w-full min-h-[85vh] flex items-center overflow-hidden pt-24 pb-16 md:pt-0 md:pb-0">
+      <section className="relative w-full min-h-[85vh] flex items-center overflow-hidden pt-32 pb-32 md:pt-0 md:pb-0">
         <div className="absolute inset-0 w-full h-full">
           <EditableImage
             src={content.heroImage}
