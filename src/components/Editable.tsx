@@ -35,7 +35,7 @@ export function EditableText({ value, onSave, className = '', multiline = false,
       role="textbox"
       aria-label="Edit text"
       {...(multiline ? { 'aria-multiline': true } : {})}
-      className={cn(className, isEditing ? 'outline-dashed outline-2 outline-brand-red bg-brand-red/10 cursor-text z-50 relative' : 'cursor-pointer hover:outline-dashed hover:outline-1 hover:outline-brand-red/50 relative transition-all')}
+      className={cn(className, isEditing ? 'outline-dashed outline-2 outline-brand-red bg-brand-red/10 cursor-text z-50 relative' : 'cursor-pointer hover:outline-dashed hover:outline-1 hover:outline-brand-red/50 relative transition-all', !value && !isEditing && 'min-w-[120px] min-h-[1.25em] bg-gray-100/50 rounded border border-dashed border-gray-300')}
       style={{ whiteSpace: 'pre-line' }}
       onClick={(e: React.MouseEvent) => {
         if (!isEditing) {
