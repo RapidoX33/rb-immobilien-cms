@@ -151,13 +151,14 @@ export default function Objekte() {
                     >
                       <Link
                         to={`/objekt/${property.id}`}
-                        className="block bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group"
+                        className="flex flex-col h-full bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group"
                       >
                         {/* Image */}
-                        <div className="relative aspect-[4/3] overflow-hidden">
+                        <div className="relative aspect-[4/3] overflow-hidden flex-shrink-0">
                           <img
                             src={property.images[0]}
                             alt={property.title}
+                            loading="lazy"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             referrerPolicy="no-referrer"
                           />
@@ -170,7 +171,7 @@ export default function Objekte() {
                         </div>
 
                         {/* Content */}
-                        <div className="p-6">
+                        <div className="p-6 flex flex-col flex-grow">
                           <h3 className="text-lg font-display font-bold text-brand-dark mb-2 line-clamp-2 group-hover:text-brand-red transition-colors">
                             {property.title}
                           </h3>
@@ -192,7 +193,7 @@ export default function Objekte() {
                               </div>
                             )}
                           </div>
-                          <div className="flex items-center gap-1.5 text-brand-red font-semibold text-sm group-hover:gap-3 transition-all">
+                          <div className="flex items-center gap-1.5 text-brand-red font-semibold text-sm group-hover:gap-3 transition-all mt-auto pt-2">
                             Details ansehen
                             <ArrowRight className="w-4 h-4" />
                           </div>

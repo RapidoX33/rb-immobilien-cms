@@ -91,11 +91,11 @@ export function EditableImage({ src, onSave, className, alt, imgClassName }: Edi
     }
   };
 
-  if (!isAdmin) return <img src={src} alt={alt} className={imgClassName || className} referrerPolicy="no-referrer" />;
+  if (!isAdmin) return <img src={src} alt={alt} className={imgClassName || className} referrerPolicy="no-referrer" loading="lazy" />;
 
   return (
     <div className={`relative group cursor-pointer ${className || ''}`} onClick={(e) => { e.stopPropagation(); if (!uploading) fileRef.current?.click(); }}>
-      <img src={src} alt={alt} className={imgClassName || 'w-full h-full object-cover'} referrerPolicy="no-referrer" />
+      <img src={src} alt={alt} className={imgClassName || 'w-full h-full object-cover'} referrerPolicy="no-referrer" loading="lazy" />
       <div className={cn(
         "absolute inset-0 bg-black/50 flex items-center justify-center transition-opacity z-10",
         uploading ? "opacity-100" : "opacity-0 group-hover:opacity-100"

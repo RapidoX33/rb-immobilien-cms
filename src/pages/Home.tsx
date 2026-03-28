@@ -13,13 +13,13 @@ export default function Home() {
       icon: Key,
       titleKey: 'homeCard1Title' as const,
       descKey: 'homeCard1Desc' as const,
-      link: '/mietobjekte',
+      link: '/objekte?typ=mieten',
     },
     {
       icon: HomeIcon,
       titleKey: 'homeCard2Title' as const,
       descKey: 'homeCard2Desc' as const,
-      link: '/kaufobjekte',
+      link: '/objekte?typ=kaufen',
     },
     {
       icon: Building,
@@ -74,7 +74,7 @@ export default function Home() {
             />
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
-                to="/mietobjekte"
+                to="/objekte"
                 className="inline-flex items-center gap-2 bg-brand-red hover:bg-red-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors"
               >
                 <EditableText
