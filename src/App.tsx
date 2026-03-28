@@ -1,8 +1,7 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import Home from './pages/Home';
-import Mietobjekte from './pages/Mietobjekte';
-import Kaufobjekte from './pages/Kaufobjekte';
+import Objekte from './pages/Objekte';
 import ObjektDetail from './pages/ObjektDetail';
 import Dienstleistungen from './pages/Dienstleistungen';
 import Team from './pages/Team';
@@ -17,8 +16,9 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'mieten', element: <Mietobjekte /> },
-      { path: 'kaufen', element: <Kaufobjekte /> },
+      { path: 'objekte', element: <Objekte /> },
+      { path: 'mieten', element: <Navigate to="/objekte?typ=mieten" replace /> },
+      { path: 'kaufen', element: <Navigate to="/objekte?typ=kaufen" replace /> },
       { path: 'objekt/:id', element: <ObjektDetail /> },
       { path: 'dienstleistungen', element: <Dienstleistungen /> },
       { path: 'team', element: <Team /> },

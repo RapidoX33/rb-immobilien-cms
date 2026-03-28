@@ -6,8 +6,7 @@ import { cn } from '../../lib/utils';
 
 const navLinks = [
   { label: 'Start', href: '/' },
-  { label: 'Mietobjekte', href: '/mieten' },
-  { label: 'Kaufobjekte', href: '/kaufen' },
+  { label: 'Objekte', href: '/objekte' },
   { label: 'Dienstleistungen', href: '/dienstleistungen' },
   { label: 'Team', href: '/team' },
   { label: 'Kontakt', href: '/kontakt' },
@@ -49,7 +48,7 @@ export function Navbar() {
             <img
               src="https://rbimmobilien.ch/img/titellogo.png"
               alt="RB Immobilien Treuhand AG"
-              className="h-14 w-auto"
+              className="h-20 w-auto"
             />
           </Link>
 

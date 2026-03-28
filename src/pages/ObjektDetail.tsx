@@ -65,7 +65,7 @@ export default function ObjektDetail() {
     );
   }
 
-  const backLink = property.type === 'mieten' ? '/mieten' : '/kaufen';
+  const backLink = property.type === 'mieten' ? '/objekte?typ=mieten' : '/objekte?typ=kaufen';
   const backLabel = property.type === 'mieten' ? 'Mietobjekte' : 'Kaufobjekte';
 
   const keyFacts = [

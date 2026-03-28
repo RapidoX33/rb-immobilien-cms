@@ -70,16 +70,25 @@ export default function Impressum() {
                   as="p"
                   className="text-brand-gray"
                 />
-                <p className="pt-2">
-                  E-Mail:{' '}
-                  <a href={`mailto:${content.impressumEmail}`} className="text-brand-red hover:underline">
-                    <EditableText
-                      value={content.impressumEmail}
-                      onSave={(v) => handleSave('impressumEmail', v)}
-                      className="text-brand-red"
-                    />
-                  </a>
-                </p>
+                <div className="pt-2 space-y-1">
+                  <p>T +41 71 626 01 01</p>
+                  <p>F +41 71 626 01 02</p>
+                  <p>
+                    E-Mail:{' '}
+                    <a href={`mailto:${content.impressumEmail}`} className="text-brand-red hover:underline">
+                      <EditableText
+                        value={content.impressumEmail}
+                        onSave={(v) => handleSave('impressumEmail', v)}
+                        className="text-brand-red"
+                      />
+                    </a>
+                  </p>
+                  <p>
+                    <a href="https://www.rbimmobilien.ch" target="_blank" rel="noopener noreferrer" className="text-brand-red hover:underline">
+                      www.rbimmobilien.ch
+                    </a>
+                  </p>
+                </div>
               </div>
             </div>
 
