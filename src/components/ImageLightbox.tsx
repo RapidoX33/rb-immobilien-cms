@@ -113,21 +113,21 @@ export function ImageLightbox({ images, initialIndex, onClose }: ImageLightboxPr
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2 }}
-          className="relative max-w-[90vw] max-h-[85vh] flex items-center justify-center"
+          className="relative w-[85vw] h-[75vh] flex items-center justify-center"
           onClick={(e) => e.stopPropagation()}
         >
           {!loaded && !error && (
-            <div className="w-[60vw] h-[60vh] bg-white/5 animate-pulse rounded-2xl" />
+            <div className="absolute inset-0 bg-white/5 animate-pulse rounded-2xl" />
           )}
           {error && (
-            <div className="w-[60vw] h-[60vh] bg-white/5 rounded-2xl flex items-center justify-center">
+            <div className="absolute inset-0 bg-white/5 rounded-2xl flex items-center justify-center">
               <ImageIcon className="w-16 h-16 text-white/20" />
             </div>
           )}
           <img
             src={images[currentIndex]}
             alt={`Bild ${currentIndex + 1}`}
-            className={`max-w-[90vw] max-h-[85vh] object-contain rounded-2xl transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0 absolute'}`}
+            className={`w-full h-full object-contain rounded-2xl transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
             referrerPolicy="no-referrer"
             onLoad={() => setLoaded(true)}
             onError={() => setError(true)}

@@ -71,8 +71,22 @@ export default function Impressum() {
                   className="text-brand-gray"
                 />
                 <div className="pt-2 space-y-1">
-                  <p>T +41 71 626 01 01</p>
-                  <p>F +41 71 626 01 02</p>
+                  <p className="flex items-center gap-1">
+                    T{' '}
+                    <EditableText
+                      value={content.footerPhone}
+                      onSave={(v) => handleSave('footerPhone', v)}
+                      className="text-brand-gray"
+                    />
+                  </p>
+                  <p className="flex items-center gap-1">
+                    F{' '}
+                    <EditableText
+                      value={content.footerFax}
+                      onSave={(v) => handleSave('footerFax', v)}
+                      className="text-brand-gray"
+                    />
+                  </p>
                   <p>
                     E-Mail:{' '}
                     <a href={`mailto:${content.impressumEmail}`} className="text-brand-red hover:underline">

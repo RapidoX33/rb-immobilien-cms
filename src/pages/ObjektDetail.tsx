@@ -17,6 +17,8 @@ import {
 import { useContent } from '../lib/contentContext';
 import { cn } from '../lib/utils';
 import { ImageLightbox } from '../components/ImageLightbox';
+import { EditableText, EditableImage } from '../components/Editable';
+import type { PropertyItem } from '../lib/content';
 
 function FadeImg({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
   const imgRef = useRef<HTMLImageElement>(null);
@@ -35,7 +37,7 @@ function FadeImg({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTML
 
 export default function ObjektDetail() {
   const { id } = useParams<{ id: string }>();
-  const { content, isLoading } = useContent();
+  const { content, isLoading, handleSave } = useContent();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -43,6 +45,29 @@ export default function ObjektDetail() {
     message: '',
   });
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const updateProperty = (field: keyof PropertyItem, value: any) => {
+    if (!content) return;
+    const updated = content.properties.map((p) =>
+      p.id === id ? { ...p, [field]: value } : p
+    );
+    handleSave('properties', updated);
+  };
+
+  const updateAgent = (field: string, value: string) => {
+    if (!content || !property) return;
+    const updated = content.properties.map((p) =>
+      p.id === id ? { ...p, agent: { ...p.agent, [field]: value } } : p
+    );
+    handleSave('properties', updated);
+  };
+
+  const updateFeature = (index: number, value: string) => {
+    if (!content || !property) return;
+    const newFeatures = [...property.features];
+    newFeatures[index] = value;
+    updateProperty('features', newFeatures);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -169,18 +194,35 @@ export default function ObjektDetail() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-3xl md:text-4xl font-display font-bold text-brand-dark mb-3">
-                {property.title}
-              </h1>
+              <EditableText
+                value={property.title}
+                onSave={(v) => updateProperty('title', v)}
+                as="h1"
+                className="text-3xl md:text-4xl font-display font-bold text-brand-dark mb-3"
+              />
               <div className="flex items-center gap-1.5 text-brand-gray mb-4">
                 <MapPin className="w-5 h-5 text-brand-red" />
-                <span>{property.address}</span>
+                <EditableText
+                  value={property.address}
+                  onSave={(v) => updateProperty('address', v)}
+                  as="span"
+                />
               </div>
               <div className="text-3xl font-display font-bold text-brand-red">
-                {property.price}
+                <EditableText
+                  value={property.price}
+                  onSave={(v) => updateProperty('price', v)}
+                  as="span"
+                  className="text-brand-red"
+                />
                 {property.priceDetail && (
                   <span className="text-base font-normal text-brand-gray ml-2">
-                    {property.priceDetail}
+                    <EditableText
+                      value={property.priceDetail}
+                      onSave={(v) => updateProperty('priceDetail', v)}
+                      as="span"
+                      className="text-brand-gray"
+                    />
                   </span>
                 )}
               </div>
@@ -218,9 +260,13 @@ export default function ObjektDetail() {
                 <h2 className="text-xl font-display font-bold text-brand-dark mb-4">
                   Beschreibung
                 </h2>
-                <p className="text-brand-gray leading-relaxed whitespace-pre-line">
-                  {property.description}
-                </p>
+                <EditableText
+                  value={property.description}
+                  onSave={(v) => updateProperty('description', v)}
+                  as="p"
+                  multiline
+                  className="text-brand-gray leading-relaxed"
+                />
               </motion.div>
             )}
 
@@ -241,7 +287,11 @@ export default function ObjektDetail() {
                       <div className="w-5 h-5 bg-brand-red/10 rounded-full flex items-center justify-center flex-shrink-0">
                         <Check className="w-3 h-3 text-brand-red" />
                       </div>
-                      <span>{feature}</span>
+                      <EditableText
+                        value={feature}
+                        onSave={(v) => updateFeature(i, v)}
+                        as="span"
+                      />
                     </div>
                   ))}
                 </div>
@@ -268,10 +318,18 @@ export default function ObjektDetail() {
                     />
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-brand-dark">
-                      {property.agent.name}
-                    </h3>
-                    <p className="text-sm text-brand-gray">{property.agent.role}</p>
+                    <EditableText
+                      value={property.agent.name}
+                      onSave={(v) => updateAgent('name', v)}
+                      as="h3"
+                      className="font-display font-bold text-brand-dark"
+                    />
+                    <EditableText
+                      value={property.agent.role}
+                      onSave={(v) => updateAgent('role', v)}
+                      as="p"
+                      className="text-sm text-brand-gray"
+                    />
                   </div>
                 </div>
                 <div className="space-y-3">
@@ -280,14 +338,22 @@ export default function ObjektDetail() {
                     className="flex items-center gap-3 text-brand-gray hover:text-brand-red transition-colors text-sm"
                   >
                     <Phone className="w-4 h-4 text-brand-red" />
-                    {property.agent.phone}
+                    <EditableText
+                      value={property.agent.phone}
+                      onSave={(v) => updateAgent('phone', v)}
+                      className="text-brand-gray"
+                    />
                   </a>
                   <a
                     href={`mailto:${property.agent.email}`}
                     className="flex items-center gap-3 text-brand-gray hover:text-brand-red transition-colors text-sm"
                   >
                     <Mail className="w-4 h-4 text-brand-red" />
-                    {property.agent.email}
+                    <EditableText
+                      value={property.agent.email}
+                      onSave={(v) => updateAgent('email', v)}
+                      className="text-brand-gray"
+                    />
                   </a>
                 </div>
               </motion.div>
