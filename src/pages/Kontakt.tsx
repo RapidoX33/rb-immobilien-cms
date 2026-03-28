@@ -148,7 +148,7 @@ export default function Kontakt() {
                       className="text-brand-red"
                     />
                   </a>
-                  <p className="text-brand-gray">
+                  <p className="text-brand-red">
                     <EditableText
                       value={content.kontaktFaxPrefix}
                       onSave={(v) => handleSave('kontaktFaxPrefix', v)}
@@ -156,7 +156,7 @@ export default function Kontakt() {
                     <EditableText
                       value={content.fax}
                       onSave={(v) => handleSave('fax', v)}
-                      className="text-brand-gray"
+                      className="text-brand-red"
                     />
                   </p>
                 </div>

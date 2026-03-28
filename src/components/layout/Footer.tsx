@@ -77,12 +77,12 @@ export function Footer() {
                   className="text-brand-red"
                 />
               </a>
-              <p className="flex items-center gap-2 text-gray-400">
-                <span className="text-brand-red">F</span>
+              <p className="flex items-center gap-2 text-brand-red">
+                <span>F</span>
                 <EditableText
                   value={content.footerFax}
                   onSave={(v) => handleSave('footerFax', v)}
-                  className="text-gray-400"
+                  className="text-brand-red"
                 />
               </p>
               <a href={`mailto:${content.footerEmail}`} className="flex items-center gap-2 text-brand-red hover:text-brand-red/80 transition-colors">
