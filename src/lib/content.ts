@@ -295,7 +295,7 @@ const defaultContent: SiteContent = {
   phoneHoursFr: '08.30 - 12.00 / 13.30 - 16.00',
   schalterDi: '08.30 - 11.30',
   schalterDo: '13.30 - 16.30',
-  googleMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2693.303272635905!2d9.10842031562858!3d47.56191997918193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479af6a8a0b0b0b1%3A0x6b8b8b8b8b8b8b8b!2sBahnhofstrasse%2020%2C%208570%20Weinfelden!5e0!3m2!1sde!2sch!4v1620000000000!5m2!1sde!2sch',
+  googleMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d862!2d9.1099205!3d47.5673968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s!2sRB%20Immobilien%20Treuhand%20AG%2C%20Marktplatz%203%2C%208570%20Weinfelden%2C%20Schweiz!5e0!3m2!1sde!2sch',
 
   // Home - card link text
   homeCardLinkText: 'Mehr erfahren',
