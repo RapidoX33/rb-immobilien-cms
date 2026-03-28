@@ -126,25 +126,27 @@ export default function Team() {
 
                   {/* Line */}
                   <div className="mt-4 pt-4 border-t border-gray-100 space-y-2">
-                    {/* Phone - always shown */}
-                    {member.phone && (
-                      <a href={`tel:${member.phone}`} className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors">
+                    {(member.phone || isAdmin) && (
+                      <a href={member.phone ? `tel:${member.phone}` : undefined} className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors">
                         <Phone className="w-4 h-4 flex-shrink-0" />
-                        <EditableText value={member.phone} onSave={(v) => updateMember(member.id, 'phone', v)} className="text-brand-red" />
+                        <EditableText value={member.phone || ''} onSave={(v) => updateMember(member.id, 'phone', v)} className="text-brand-red" />
                       </a>
                     )}
-                    {/* Mobile - only if filled */}
-                    {member.mobile && member.mobile.trim() !== '' && (
+                    {(member.mobile && member.mobile.trim() !== '') ? (
                       <a href={`tel:${member.mobile}`} className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors">
                         <Smartphone className="w-4 h-4 flex-shrink-0" />
                         <EditableText value={member.mobile} onSave={(v) => updateMember(member.id, 'mobile', v)} className="text-brand-red" />
                       </a>
-                    )}
-                    {/* Email - always shown */}
-                    {member.email && (
-                      <a href={`mailto:${member.email}`} className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors">
+                    ) : isAdmin ? (
+                      <div className="flex items-center gap-3 text-sm text-brand-gray">
+                        <Smartphone className="w-4 h-4 flex-shrink-0 text-brand-red/40" />
+                        <EditableText value="" onSave={(v) => updateMember(member.id, 'mobile', v)} className="text-brand-gray" />
+                      </div>
+                    ) : null}
+                    {(member.email || isAdmin) && (
+                      <a href={member.email ? `mailto:${member.email}` : undefined} className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors">
                         <Mail className="w-4 h-4 flex-shrink-0" />
-                        <EditableText value={member.email} onSave={(v) => updateMember(member.id, 'email', v)} className="text-brand-red" />
+                        <EditableText value={member.email || ''} onSave={(v) => updateMember(member.id, 'email', v)} className="text-brand-red" />
                       </a>
                     )}
                   </div>
