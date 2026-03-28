@@ -119,7 +119,13 @@ export function EditableImage({ src, onSave, className, alt, imgClassName }: Edi
     }
   };
 
-  if (!isAdmin) return <FadeImg src={src} alt={alt} className={imgClassName || className} />;
+  if (!isAdmin) {
+    return (
+      <div className={className}>
+        <FadeImg src={src} alt={alt} className={imgClassName || 'w-full h-full object-cover'} />
+      </div>
+    );
+  }
 
   return (
     <div className={`relative group cursor-pointer ${className || ''}`} onClick={(e) => { e.stopPropagation(); if (!uploading) fileRef.current?.click(); }}>
