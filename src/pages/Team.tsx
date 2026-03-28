@@ -132,7 +132,7 @@ export default function Team() {
                   })()}
 
                   {/* Contact */}
-                  <div className="mt-2 pt-5 border-t border-gray-100 space-y-2">
+                  <div className="mt-4 pt-4 border-t border-gray-100 space-y-2">
                     <a
                       href={`tel:${member.phone}`}
                       className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
