@@ -275,7 +275,7 @@ export default function Kontakt() {
               className="space-y-8"
             >
               {/* Contact Form */}
-              <div className="bg-white p-8 rounded-3xl shadow-sm">
+              <div className="bg-white p-8 rounded-3xl shadow-sm h-full flex flex-col">
                 <EditableText
                   value={content.kontaktFormTitle}
                   onSave={(v) => handleSave('kontaktFormTitle', v)}
@@ -311,7 +311,7 @@ export default function Kontakt() {
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-4 h-full">
                     <div>
                       <label className="block text-sm font-medium text-brand-dark mb-1">
                         <EditableText
@@ -381,7 +381,7 @@ export default function Kontakt() {
                       />
                     </div>
 
-                    <div>
+                    <div className="flex flex-col flex-grow">
                       <label className="block text-sm font-medium text-brand-dark mb-1">
                         <EditableText
                           value={content.kontaktFormNachrichtLabel}
@@ -391,8 +391,7 @@ export default function Kontakt() {
                       <textarea
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        rows={5}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red transition-colors resize-none"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red transition-colors resize-none flex-grow min-h-[120px]"
                         placeholder={content.kontaktFormNachrichtPlaceholder}
                         required
                       />
