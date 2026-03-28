@@ -10,13 +10,15 @@ export default function Impressum() {
     <>
       {/* Hero Section */}
       <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center pt-24">
-        <EditableImage
-          src={content.impressumHeroImage}
-          onSave={(url) => handleSave('impressumHeroImage', url)}
-          className="absolute inset-0 w-full h-full"
-          imgClassName="w-full h-full object-cover"
-          alt="Impressum"
-        />
+        <div className="absolute inset-0 w-full h-full">
+          <EditableImage
+            src={content.impressumHeroImage}
+            onSave={(url) => handleSave('impressumHeroImage', url)}
+            className="w-full h-full"
+            imgClassName="w-full h-full object-cover"
+            alt="Impressum"
+          />
+        </div>
         <div className="absolute inset-0 bg-brand-dark/60" />
         <div className="relative z-10 text-center text-white">
           <motion.div

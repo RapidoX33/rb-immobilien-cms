@@ -72,7 +72,7 @@ export default function Team() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group"
+                className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group flex flex-col h-full"
               >
                 {/* Member Image */}
                 <div className="relative overflow-hidden">
@@ -86,7 +86,7 @@ export default function Team() {
                 </div>
 
                 {/* Member Info */}
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <EditableText
                     value={member.name}
                     onSave={(v) => updateMember(member.id, 'name', v)}
@@ -115,7 +115,7 @@ export default function Team() {
                   )}
 
                   {/* Contact */}
-                  <div className="mt-5 pt-5 border-t border-gray-100 space-y-2">
+                  <div className="mt-auto pt-5 border-t border-gray-100 space-y-2">
                     <a
                       href={`tel:${member.phone}`}
                       className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
