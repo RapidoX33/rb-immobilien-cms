@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { MapPin, Phone, Printer, Mail, Clock, Send } from 'lucide-react';
 import { useContent } from '../lib/contentContext';
 import { EditableText, EditableImage } from '../components/Editable';
 
@@ -137,26 +137,16 @@ export default function Kontakt() {
                     as="p"
                     className="font-semibold text-brand-dark mb-1"
                   />
-                  <p className="flex items-center gap-1">
+                  <a href={`tel:${content.phone}`} className="flex items-center gap-2 text-brand-red hover:text-brand-red/80 transition-colors">
+                    <Phone className="w-4 h-4 text-brand-red flex-shrink-0" />
                     <EditableText
-                      value={content.kontaktTelPrefix}
-                      onSave={(v) => handleSave('kontaktTelPrefix', v)}
-                      className="text-brand-gray"
-                    />{' '}
-                    <a href={`tel:${content.phone}`} className="text-brand-red hover:text-brand-red/80">
-                      <EditableText
-                        value={content.phone}
-                        onSave={(v) => handleSave('phone', v)}
-                        className="text-brand-red"
-                      />
-                    </a>
-                  </p>
-                  <p className="flex items-center gap-1">
-                    <EditableText
-                      value={content.kontaktFaxPrefix}
-                      onSave={(v) => handleSave('kontaktFaxPrefix', v)}
-                      className="text-brand-gray"
-                    />{' '}
+                      value={content.phone}
+                      onSave={(v) => handleSave('phone', v)}
+                      className="text-brand-red"
+                    />
+                  </a>
+                  <p className="flex items-center gap-2">
+                    <Printer className="w-4 h-4 text-brand-red flex-shrink-0" />
                     <span className="text-brand-red">
                       <EditableText
                         value={content.fax}
@@ -427,22 +417,29 @@ export default function Kontakt() {
                 )}
               </div>
 
-              {/* Google Maps */}
-              <div className="rounded-3xl overflow-hidden shadow-sm">
-                <iframe
-                  src={content.googleMapsUrl}
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title={content.kontaktMapTitle}
-                  className="h-[300px] w-full"
-                />
-              </div>
             </motion.div>
           </div>
+
+          {/* Google Maps - Full Width */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-12 rounded-3xl overflow-hidden shadow-sm"
+          >
+            <iframe
+              src={content.googleMapsUrl}
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={content.kontaktMapTitle}
+              className="h-[400px] w-full"
+            />
+          </motion.div>
         </div>
       </section>
     </>

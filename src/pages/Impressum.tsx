@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Phone, Printer, Mail, Globe } from 'lucide-react';
 import { useContent } from '../lib/contentContext';
 import { EditableText, EditableImage } from '../components/Editable';
 
@@ -79,27 +80,17 @@ export default function Impressum() {
                   as="p"
                   className="text-brand-gray"
                 />
-                <div className="pt-2 space-y-1">
-                  <p className="flex items-center gap-1">
+                <div className="pt-3 space-y-2">
+                  <a href={`tel:${content.footerPhone}`} className="flex items-center gap-2 text-brand-red hover:text-brand-red/80 transition-colors">
+                    <Phone className="w-4 h-4 text-brand-red flex-shrink-0" />
                     <EditableText
-                      value={content.impressumTelPrefix}
-                      onSave={(v) => handleSave('impressumTelPrefix', v)}
-                      className="text-brand-gray"
-                    />{' '}
-                    <a href={`tel:${content.footerPhone}`} className="text-brand-red hover:text-brand-red/80">
-                      <EditableText
-                        value={content.footerPhone}
-                        onSave={(v) => handleSave('footerPhone', v)}
-                        className="text-brand-red"
-                      />
-                    </a>
-                  </p>
-                  <p className="flex items-center gap-1">
-                    <EditableText
-                      value={content.impressumFaxPrefix}
-                      onSave={(v) => handleSave('impressumFaxPrefix', v)}
-                      className="text-brand-gray"
-                    />{' '}
+                      value={content.footerPhone}
+                      onSave={(v) => handleSave('footerPhone', v)}
+                      className="text-brand-red"
+                    />
+                  </a>
+                  <p className="flex items-center gap-2">
+                    <Printer className="w-4 h-4 text-brand-red flex-shrink-0" />
                     <span className="text-brand-red">
                       <EditableText
                         value={content.footerFax}
@@ -108,28 +99,22 @@ export default function Impressum() {
                       />
                     </span>
                   </p>
-                  <p>
+                  <a href={`mailto:${content.impressumEmail}`} className="flex items-center gap-2 text-brand-red hover:text-brand-red/80 transition-colors">
+                    <Mail className="w-4 h-4 text-brand-red flex-shrink-0" />
                     <EditableText
-                      value={content.impressumEmailLabel}
-                      onSave={(v) => handleSave('impressumEmailLabel', v)}
-                    />{' '}
-                    <a href={`mailto:${content.impressumEmail}`} className="text-brand-red hover:underline">
-                      <EditableText
-                        value={content.impressumEmail}
-                        onSave={(v) => handleSave('impressumEmail', v)}
-                        className="text-brand-red"
-                      />
-                    </a>
-                  </p>
-                  <p>
-                    <a href={content.impressumWebsiteUrl} target="_blank" rel="noopener noreferrer" className="text-brand-red hover:underline">
-                      <EditableText
-                        value={content.impressumWebsite}
-                        onSave={(v) => handleSave('impressumWebsite', v)}
-                        className="text-brand-red"
-                      />
-                    </a>
-                  </p>
+                      value={content.impressumEmail}
+                      onSave={(v) => handleSave('impressumEmail', v)}
+                      className="text-brand-red"
+                    />
+                  </a>
+                  <a href={content.impressumWebsiteUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-brand-red hover:text-brand-red/80 transition-colors">
+                    <Globe className="w-4 h-4 text-brand-red flex-shrink-0" />
+                    <EditableText
+                      value={content.impressumWebsite}
+                      onSave={(v) => handleSave('impressumWebsite', v)}
+                      className="text-brand-red"
+                    />
+                  </a>
                 </div>
               </div>
             </div>

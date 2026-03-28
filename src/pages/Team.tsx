@@ -103,80 +103,80 @@ export default function Team() {
                   />
 
                   {/* Qualifications - always 2 slots in admin, only filled in public */}
-                  <ul className="mt-3 space-y-1 flex-grow">
-                    {(() => {
-                      const maxSlots = 2;
-                      const slots = isAdmin
-                        ? Array.from({ length: maxSlots }, (_, i) => member.qualifications[i] || '')
-                        : member.qualifications.filter(q => q.trim() !== '');
-                      return slots.map((qual, qi) => (
-                        <li key={qi} className="text-sm text-brand-gray">
-                          <EditableText
-                            value={qual}
-                            onSave={(v) => {
-                              const newQuals = Array.from({ length: maxSlots }, (_, i) => member.qualifications[i] || '');
-                              newQuals[qi] = v;
-                              updateMember(member.id, 'qualifications', newQuals.filter(q => q.trim() !== ''));
-                            }}
-                            as="span"
-                          />
-                        </li>
-                      ));
-                    })()}
-                  </ul>
+                  {(() => {
+                    const maxSlots = 2;
+                    const slots = isAdmin
+                      ? Array.from({ length: maxSlots }, (_, i) => member.qualifications[i] || '')
+                      : member.qualifications.filter(q => q.trim() !== '');
+                    return (
+                      <div className="mt-3 flex-grow">
+                        {slots.length > 0 ? (
+                          <ul className="space-y-1">
+                            {slots.map((qual, qi) => (
+                              <li key={qi} className="text-sm text-brand-gray">
+                                <EditableText
+                                  value={qual}
+                                  onSave={(v) => {
+                                    const newQuals = Array.from({ length: maxSlots }, (_, i) => member.qualifications[i] || '');
+                                    newQuals[qi] = v;
+                                    updateMember(member.id, 'qualifications', newQuals.filter(q => q.trim() !== ''));
+                                  }}
+                                  as="span"
+                                />
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
+                    );
+                  })()}
 
                   {/* Contact */}
-                  <div className="mt-6 pt-6 border-t border-gray-100 space-y-2">
-                    {(member.phone || isAdmin) && (
+                  <div className="pt-6 border-t border-gray-100 space-y-2">
+                    <a
+                      href={`tel:${member.phone}`}
+                      className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
+                    >
+                      <Phone className="w-4 h-4 flex-shrink-0 text-brand-red" />
+                      <EditableText
+                        value={member.phone}
+                        onSave={(v) => updateMember(member.id, 'phone', v)}
+                        className="text-brand-red"
+                      />
+                    </a>
+                    {member.mobile && member.mobile.trim() !== '' ? (
                       <a
-                        href={member.phone ? `tel:${member.phone}` : undefined}
-                        className={`flex items-center gap-3 text-sm ${member.phone ? 'text-brand-red hover:text-brand-red/80' : 'text-brand-gray'} transition-colors`}
+                        href={`tel:${member.mobile}`}
+                        className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
                       >
-                        <Phone className="w-4 h-4 flex-shrink-0 text-brand-red" />
+                        <Smartphone className="w-4 h-4 flex-shrink-0 text-brand-red" />
                         <EditableText
-                          value={member.phone || ''}
-                          onSave={(v) => updateMember(member.id, 'phone', v)}
+                          value={member.mobile}
+                          onSave={(v) => updateMember(member.id, 'mobile', v)}
                           className="text-brand-red"
                         />
                       </a>
-                    )}
-                    {(member.mobile || isAdmin) ? (
-                      member.mobile ? (
-                        <a
-                          href={`tel:${member.mobile}`}
-                          className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
-                        >
-                          <Smartphone className="w-4 h-4 flex-shrink-0 text-brand-red" />
-                          <EditableText
-                            value={member.mobile}
-                            onSave={(v) => updateMember(member.id, 'mobile', v)}
-                            className="text-brand-red"
-                          />
-                        </a>
-                      ) : isAdmin ? (
-                        <div className="flex items-center gap-3 text-sm text-brand-gray">
-                          <Smartphone className="w-4 h-4 flex-shrink-0 text-brand-red" />
-                          <EditableText
-                            value=""
-                            onSave={(v) => updateMember(member.id, 'mobile', v)}
-                            className="text-brand-gray"
-                          />
-                        </div>
-                      ) : null
+                    ) : isAdmin ? (
+                      <div className="flex items-center gap-3 text-sm text-brand-gray">
+                        <Smartphone className="w-4 h-4 flex-shrink-0 text-brand-red/40" />
+                        <EditableText
+                          value=""
+                          onSave={(v) => updateMember(member.id, 'mobile', v)}
+                          className="text-brand-gray"
+                        />
+                      </div>
                     ) : null}
-                    {(member.email || isAdmin) && (
-                      <a
-                        href={member.email ? `mailto:${member.email}` : undefined}
-                        className={`flex items-center gap-3 text-sm ${member.email ? 'text-brand-red hover:text-brand-red/80' : 'text-brand-gray'} transition-colors`}
-                      >
-                        <Mail className="w-4 h-4 flex-shrink-0 text-brand-red" />
-                        <EditableText
-                          value={member.email || ''}
-                          onSave={(v) => updateMember(member.id, 'email', v)}
-                          className="text-brand-red"
-                        />
-                      </a>
-                    )}
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
+                    >
+                      <Mail className="w-4 h-4 flex-shrink-0 text-brand-red" />
+                      <EditableText
+                        value={member.email}
+                        onSave={(v) => updateMember(member.id, 'email', v)}
+                        className="text-brand-red"
+                      />
+                    </a>
                   </div>
                 </div>
               </motion.div>
