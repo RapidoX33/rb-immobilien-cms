@@ -9,7 +9,7 @@ export default function Impressum() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[30vh] min-h-[300px] flex items-center justify-center pt-24">
+      <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center pt-24">
         <EditableImage
           src={content.impressumHeroImage}
           onSave={(url) => handleSave('impressumHeroImage', url)}

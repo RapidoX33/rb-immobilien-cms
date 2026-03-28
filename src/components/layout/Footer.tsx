@@ -69,15 +69,15 @@ export function Footer() {
               className="text-lg font-display font-semibold text-white"
             />
             <div className="text-gray-400 space-y-2">
-              <p className="flex items-center gap-2">
-                <span className="text-brand-red">T</span>
+              <a href={`tel:${content.footerPhone}`} className="flex items-center gap-2 text-brand-red hover:text-brand-red/80 transition-colors">
+                <span>T</span>
                 <EditableText
                   value={content.footerPhone}
                   onSave={(v) => handleSave('footerPhone', v)}
-                  className="text-gray-400"
+                  className="text-brand-red"
                 />
-              </p>
-              <p className="flex items-center gap-2">
+              </a>
+              <p className="flex items-center gap-2 text-gray-400">
                 <span className="text-brand-red">F</span>
                 <EditableText
                   value={content.footerFax}
@@ -85,14 +85,14 @@ export function Footer() {
                   className="text-gray-400"
                 />
               </p>
-              <p className="flex items-center gap-2">
-                <span className="text-brand-red">E</span>
+              <a href={`mailto:${content.footerEmail}`} className="flex items-center gap-2 text-brand-red hover:text-brand-red/80 transition-colors">
+                <span>E</span>
                 <EditableText
                   value={content.footerEmail}
                   onSave={(v) => handleSave('footerEmail', v)}
-                  className="text-gray-400"
+                  className="text-brand-red"
                 />
-              </p>
+              </a>
             </div>
           </div>
         </div>

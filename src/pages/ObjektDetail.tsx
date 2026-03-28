@@ -69,6 +69,13 @@ export default function ObjektDetail() {
     updateProperty('features', newFeatures);
   };
 
+  const updateImage = (index: number, url: string) => {
+    if (!content || !property) return;
+    const newImages = [...property.images];
+    newImages[index] = url;
+    updateProperty('images', newImages);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
@@ -121,10 +128,10 @@ export default function ObjektDetail() {
   const backLink = property.type === 'mieten' ? '/objekte?typ=mieten' : '/objekte?typ=kaufen';
 
   const keyFacts = [
-    { labelKey: 'detailLabelZimmer' as const, value: property.rooms !== null ? `${property.rooms}` : '-', icon: Home },
-    { labelKey: 'detailLabelFlaeche' as const, value: property.area !== null ? `${property.area} m\u00B2` : '-', icon: Maximize },
-    { labelKey: 'detailLabelStockwerk' as const, value: property.floor || '-', icon: Building },
-    { labelKey: 'detailLabelVerfuegbar' as const, value: property.available || '-', icon: Calendar },
+    { labelKey: 'detailLabelZimmer' as const, value: property.rooms !== null ? `${property.rooms}` : '-', field: 'rooms' as const, icon: Home },
+    { labelKey: 'detailLabelFlaeche' as const, value: property.area !== null ? `${property.area} m\u00B2` : '-', field: 'area' as const, icon: Maximize },
+    { labelKey: 'detailLabelStockwerk' as const, value: property.floor || '-', field: 'floor' as const, icon: Building },
+    { labelKey: 'detailLabelVerfuegbar' as const, value: property.available || '-', field: 'available' as const, icon: Calendar },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -159,7 +166,7 @@ export default function ObjektDetail() {
               />
             </span>
             <span className="bg-brand-light text-brand-dark px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
-              {property.category}
+              <EditableText value={property.category} onSave={(v) => updateProperty('category', v)} />
             </span>
           </div>
         </div>
@@ -169,30 +176,30 @@ export default function ObjektDetail() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         {property.images.length >= 3 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="md:col-span-2 relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(0)}>
-              <FadeImg src={property.images[0]} alt={property.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="md:col-span-2 rounded-3xl overflow-hidden aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(0)}>
+              <EditableImage src={property.images[0]} onSave={(url) => updateImage(0, url)} className="w-full h-full" imgClassName="w-full h-full object-cover" alt={property.title} />
             </div>
             <div className="hidden md:grid grid-rows-2 gap-4">
-              <div className="relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(1)}>
-                <FadeImg src={property.images[1]} alt={`${property.title} 2`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="rounded-3xl overflow-hidden aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(1)}>
+                <EditableImage src={property.images[1]} onSave={(url) => updateImage(1, url)} className="w-full h-full" imgClassName="w-full h-full object-cover" alt={`${property.title} 2`} />
               </div>
-              <div className="relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(2)}>
-                <FadeImg src={property.images[2]} alt={`${property.title} 3`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="rounded-3xl overflow-hidden aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(2)}>
+                <EditableImage src={property.images[2]} onSave={(url) => updateImage(2, url)} className="w-full h-full" imgClassName="w-full h-full object-cover" alt={`${property.title} 3`} />
               </div>
             </div>
           </div>
         ) : property.images.length === 2 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(0)}>
-              <FadeImg src={property.images[0]} alt={property.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="rounded-3xl overflow-hidden aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(0)}>
+              <EditableImage src={property.images[0]} onSave={(url) => updateImage(0, url)} className="w-full h-full" imgClassName="w-full h-full object-cover" alt={property.title} />
             </div>
-            <div className="relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(1)}>
-              <FadeImg src={property.images[1]} alt={`${property.title} 2`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="rounded-3xl overflow-hidden aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(1)}>
+              <EditableImage src={property.images[1]} onSave={(url) => updateImage(1, url)} className="w-full h-full" imgClassName="w-full h-full object-cover" alt={`${property.title} 2`} />
             </div>
           </div>
         ) : (
-          <div className="relative rounded-3xl overflow-hidden group aspect-[16/9] max-h-[500px] cursor-pointer" onClick={() => setLightboxIndex(0)}>
-            <FadeImg src={property.images[0]} alt={property.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div className="rounded-3xl overflow-hidden aspect-[16/9] max-h-[500px] cursor-pointer" onClick={() => setLightboxIndex(0)}>
+            <EditableImage src={property.images[0]} onSave={(url) => updateImage(0, url)} className="w-full h-full" imgClassName="w-full h-full object-cover" alt={property.title} />
           </div>
         )}
       </section>
@@ -256,7 +263,10 @@ export default function ObjektDetail() {
                 >
                   <fact.icon className="w-6 h-6 text-brand-red mx-auto mb-2" />
                   <div className="text-xl font-display font-bold text-brand-dark">
-                    {fact.value}
+                    <EditableText
+                      value={fact.value}
+                      onSave={(v) => updateProperty(fact.field, v)}
+                    />
                   </div>
                   <div className="text-sm text-brand-gray mt-1">
                     <EditableText
@@ -336,10 +346,12 @@ export default function ObjektDetail() {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
-                    <FadeImg
+                    <EditableImage
                       src={property.agent.image}
+                      onSave={(url) => updateAgent('image', url)}
+                      className="w-full h-full"
+                      imgClassName="w-full h-full object-cover"
                       alt={property.agent.name}
-                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div>
@@ -366,18 +378,18 @@ export default function ObjektDetail() {
                     <EditableText
                       value={property.agent.phone}
                       onSave={(v) => updateAgent('phone', v)}
-                      className="text-brand-gray"
+                      className="text-brand-red"
                     />
                   </a>
                   <a
                     href={`mailto:${property.agent.email}`}
-                    className="flex items-center gap-3 text-brand-gray hover:text-brand-red transition-colors text-sm"
+                    className="flex items-center gap-3 text-brand-red hover:text-brand-red/80 transition-colors text-sm"
                   >
                     <Mail className="w-4 h-4 text-brand-red" />
                     <EditableText
                       value={property.agent.email}
                       onSave={(v) => updateAgent('email', v)}
-                      className="text-brand-gray"
+                      className="text-brand-red"
                     />
                   </a>
                 </div>

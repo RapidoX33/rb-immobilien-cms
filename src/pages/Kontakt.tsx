@@ -137,7 +137,7 @@ export default function Kontakt() {
                     as="p"
                     className="font-semibold text-brand-dark mb-1"
                   />
-                  <p className="text-brand-gray">
+                  <a href={`tel:${content.phone}`} className="flex items-center gap-1 text-brand-red hover:text-brand-red/80 transition-colors">
                     <EditableText
                       value={content.kontaktTelPrefix}
                       onSave={(v) => handleSave('kontaktTelPrefix', v)}
@@ -145,9 +145,9 @@ export default function Kontakt() {
                     <EditableText
                       value={content.phone}
                       onSave={(v) => handleSave('phone', v)}
-                      className="text-brand-gray"
+                      className="text-brand-red"
                     />
-                  </p>
+                  </a>
                   <p className="text-brand-gray">
                     <EditableText
                       value={content.kontaktFaxPrefix}

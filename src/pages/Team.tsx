@@ -118,26 +118,38 @@ export default function Team() {
                   <div className="mt-5 pt-5 border-t border-gray-100 space-y-2">
                     <a
                       href={`tel:${member.phone}`}
-                      className="flex items-center gap-3 text-sm text-brand-gray hover:text-brand-red transition-colors"
+                      className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
                     >
                       <Phone className="w-4 h-4 flex-shrink-0" />
-                      {member.phone}
+                      <EditableText
+                        value={member.phone}
+                        onSave={(v) => updateMember(member.id, 'phone', v)}
+                        className="text-brand-red"
+                      />
                     </a>
                     {member.mobile && (
                       <a
                         href={`tel:${member.mobile}`}
-                        className="flex items-center gap-3 text-sm text-brand-gray hover:text-brand-red transition-colors"
+                        className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
                       >
                         <Smartphone className="w-4 h-4 flex-shrink-0" />
-                        {member.mobile}
+                        <EditableText
+                          value={member.mobile}
+                          onSave={(v) => updateMember(member.id, 'mobile', v)}
+                          className="text-brand-red"
+                        />
                       </a>
                     )}
                     <a
                       href={`mailto:${member.email}`}
-                      className="flex items-center gap-3 text-sm text-brand-gray hover:text-brand-red transition-colors"
+                      className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
                     >
                       <Mail className="w-4 h-4 flex-shrink-0" />
-                      {member.email}
+                      <EditableText
+                        value={member.email}
+                        onSave={(v) => updateMember(member.id, 'email', v)}
+                        className="text-brand-red"
+                      />
                     </a>
                   </div>
                 </div>
