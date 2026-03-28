@@ -19,14 +19,18 @@ export default function Impressum() {
         />
         <div className="absolute inset-0 bg-brand-dark/60" />
         <div className="relative z-10 text-center text-white">
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="font-display text-5xl md:text-6xl font-bold"
           >
-            Impressum
-          </motion.h1>
+            <EditableText
+              value={content.impressumPageTitle}
+              onSave={(v) => handleSave('impressumPageTitle', v)}
+              as="h1"
+              className="font-display text-5xl md:text-6xl font-bold"
+            />
+          </motion.div>
         </div>
       </section>
 
@@ -42,9 +46,12 @@ export default function Impressum() {
           >
             {/* Kontakt-Adresse */}
             <div className="mb-10">
-              <h2 className="text-2xl font-display font-bold text-brand-dark pb-4 border-b border-gray-200 mb-6">
-                Kontakt-Adresse
-              </h2>
+              <EditableText
+                value={content.impressumSectionKontakt}
+                onSave={(v) => handleSave('impressumSectionKontakt', v)}
+                as="h2"
+                className="text-2xl font-display font-bold text-brand-dark pb-4 border-b border-gray-200 mb-6"
+              />
               <div className="space-y-1 text-brand-gray">
                 <EditableText
                   value={content.impressumCompanyName}
@@ -72,7 +79,10 @@ export default function Impressum() {
                 />
                 <div className="pt-2 space-y-1">
                   <p className="flex items-center gap-1">
-                    T{' '}
+                    <EditableText
+                      value={content.impressumTelPrefix}
+                      onSave={(v) => handleSave('impressumTelPrefix', v)}
+                    />{' '}
                     <EditableText
                       value={content.footerPhone}
                       onSave={(v) => handleSave('footerPhone', v)}
@@ -80,7 +90,10 @@ export default function Impressum() {
                     />
                   </p>
                   <p className="flex items-center gap-1">
-                    F{' '}
+                    <EditableText
+                      value={content.impressumFaxPrefix}
+                      onSave={(v) => handleSave('impressumFaxPrefix', v)}
+                    />{' '}
                     <EditableText
                       value={content.footerFax}
                       onSave={(v) => handleSave('footerFax', v)}
@@ -88,7 +101,10 @@ export default function Impressum() {
                     />
                   </p>
                   <p>
-                    E-Mail:{' '}
+                    <EditableText
+                      value={content.impressumEmailLabel}
+                      onSave={(v) => handleSave('impressumEmailLabel', v)}
+                    />{' '}
                     <a href={`mailto:${content.impressumEmail}`} className="text-brand-red hover:underline">
                       <EditableText
                         value={content.impressumEmail}
@@ -98,8 +114,12 @@ export default function Impressum() {
                     </a>
                   </p>
                   <p>
-                    <a href="https://www.rbimmobilien.ch" target="_blank" rel="noopener noreferrer" className="text-brand-red hover:underline">
-                      www.rbimmobilien.ch
+                    <a href={content.impressumWebsiteUrl} target="_blank" rel="noopener noreferrer" className="text-brand-red hover:underline">
+                      <EditableText
+                        value={content.impressumWebsite}
+                        onSave={(v) => handleSave('impressumWebsite', v)}
+                        className="text-brand-red"
+                      />
                     </a>
                   </p>
                 </div>
@@ -108,9 +128,12 @@ export default function Impressum() {
 
             {/* Vertretungsberechtigte Person */}
             <div className="mb-10">
-              <h2 className="text-2xl font-display font-bold text-brand-dark pb-4 border-b border-gray-200 mb-6">
-                Vertretungsberechtigte Person
-              </h2>
+              <EditableText
+                value={content.impressumSectionPerson}
+                onSave={(v) => handleSave('impressumSectionPerson', v)}
+                as="h2"
+                className="text-2xl font-display font-bold text-brand-dark pb-4 border-b border-gray-200 mb-6"
+              />
               <EditableText
                 value={content.impressumPerson}
                 onSave={(v) => handleSave('impressumPerson', v)}
@@ -121,9 +144,12 @@ export default function Impressum() {
 
             {/* Handelsregister-Eintrag */}
             <div>
-              <h2 className="text-2xl font-display font-bold text-brand-dark pb-4 border-b border-gray-200 mb-6">
-                Handelsregister-Eintrag
-              </h2>
+              <EditableText
+                value={content.impressumSectionHandelsregister}
+                onSave={(v) => handleSave('impressumSectionHandelsregister', v)}
+                as="h2"
+                className="text-2xl font-display font-bold text-brand-dark pb-4 border-b border-gray-200 mb-6"
+              />
               <div className="space-y-1 text-brand-gray">
                 <EditableText
                   value={content.impressumCompanyName}
@@ -132,7 +158,10 @@ export default function Impressum() {
                   className="text-brand-gray"
                 />
                 <p>
-                  UID:{' '}
+                  <EditableText
+                    value={content.impressumUIDLabel}
+                    onSave={(v) => handleSave('impressumUIDLabel', v)}
+                  />{' '}
                   <a
                     href={content.impressumUIDLink}
                     target="_blank"

@@ -154,7 +154,11 @@ export default function Home() {
                       className="text-brand-gray leading-relaxed"
                     />
                     <span className="inline-flex items-center gap-1 mt-6 text-brand-red font-semibold text-sm group-hover:gap-2 transition-all">
-                      Mehr erfahren <ArrowRight className="w-4 h-4" />
+                      <EditableText
+                        value={content.homeCardLinkText}
+                        onSave={(v) => handleSave('homeCardLinkText', v)}
+                      />
+                      {' '}<ArrowRight className="w-4 h-4" />
                     </span>
                   </Link>
                 </motion.div>

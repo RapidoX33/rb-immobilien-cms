@@ -97,7 +97,12 @@ export default function Kontakt() {
                   <MapPin className="w-6 h-6 text-brand-red" />
                 </div>
                 <div>
-                  <p className="font-semibold text-brand-dark mb-1">Adresse</p>
+                  <EditableText
+                    value={content.kontaktAdresseLabel}
+                    onSave={(v) => handleSave('kontaktAdresseLabel', v)}
+                    as="p"
+                    className="font-semibold text-brand-dark mb-1"
+                  />
                   <EditableText
                     value={content.address}
                     onSave={(v) => handleSave('address', v)}
@@ -126,9 +131,17 @@ export default function Kontakt() {
                   <Phone className="w-6 h-6 text-brand-red" />
                 </div>
                 <div>
-                  <p className="font-semibold text-brand-dark mb-1">Telefon & Fax</p>
+                  <EditableText
+                    value={content.kontaktTelefonFaxLabel}
+                    onSave={(v) => handleSave('kontaktTelefonFaxLabel', v)}
+                    as="p"
+                    className="font-semibold text-brand-dark mb-1"
+                  />
                   <p className="text-brand-gray">
-                    Tel:{' '}
+                    <EditableText
+                      value={content.kontaktTelPrefix}
+                      onSave={(v) => handleSave('kontaktTelPrefix', v)}
+                    />{' '}
                     <EditableText
                       value={content.phone}
                       onSave={(v) => handleSave('phone', v)}
@@ -136,7 +149,10 @@ export default function Kontakt() {
                     />
                   </p>
                   <p className="text-brand-gray">
-                    Fax:{' '}
+                    <EditableText
+                      value={content.kontaktFaxPrefix}
+                      onSave={(v) => handleSave('kontaktFaxPrefix', v)}
+                    />{' '}
                     <EditableText
                       value={content.fax}
                       onSave={(v) => handleSave('fax', v)}
@@ -152,7 +168,12 @@ export default function Kontakt() {
                   <Mail className="w-6 h-6 text-brand-red" />
                 </div>
                 <div>
-                  <p className="font-semibold text-brand-dark mb-1">E-Mail</p>
+                  <EditableText
+                    value={content.kontaktEmailLabel}
+                    onSave={(v) => handleSave('kontaktEmailLabel', v)}
+                    as="p"
+                    className="font-semibold text-brand-dark mb-1"
+                  />
                   <a href={`mailto:${content.email}`} className="text-brand-red hover:underline">
                     <EditableText
                       value={content.email}
@@ -167,15 +188,29 @@ export default function Kontakt() {
               <div className="bg-white p-8 rounded-3xl shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
                   <Clock className="w-6 h-6 text-brand-red" />
-                  <h3 className="text-xl font-display font-bold text-brand-dark">Öffnungszeiten</h3>
+                  <EditableText
+                    value={content.kontaktOeffnungszeitenTitle}
+                    onSave={(v) => handleSave('kontaktOeffnungszeitenTitle', v)}
+                    as="h3"
+                    className="text-xl font-display font-bold text-brand-dark"
+                  />
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <p className="font-semibold text-brand-dark mb-2">Telefon</p>
+                    <EditableText
+                      value={content.kontaktTelefonSection}
+                      onSave={(v) => handleSave('kontaktTelefonSection', v)}
+                      as="p"
+                      className="font-semibold text-brand-dark mb-2"
+                    />
                     <div className="text-brand-gray text-sm space-y-1">
                       <p className="flex justify-between">
-                        <span>Mo - Do</span>
+                        <EditableText
+                          value={content.kontaktMoDoLabel}
+                          onSave={(v) => handleSave('kontaktMoDoLabel', v)}
+                          as="span"
+                        />
                         <EditableText
                           value={content.phoneHoursMoDo}
                           onSave={(v) => handleSave('phoneHoursMoDo', v)}
@@ -183,7 +218,11 @@ export default function Kontakt() {
                         />
                       </p>
                       <p className="flex justify-between">
-                        <span>Fr</span>
+                        <EditableText
+                          value={content.kontaktFrLabel}
+                          onSave={(v) => handleSave('kontaktFrLabel', v)}
+                          as="span"
+                        />
                         <EditableText
                           value={content.phoneHoursFr}
                           onSave={(v) => handleSave('phoneHoursFr', v)}
@@ -194,10 +233,19 @@ export default function Kontakt() {
                   </div>
 
                   <div className="border-t pt-4">
-                    <p className="font-semibold text-brand-dark mb-2">Schalter</p>
+                    <EditableText
+                      value={content.kontaktSchalterSection}
+                      onSave={(v) => handleSave('kontaktSchalterSection', v)}
+                      as="p"
+                      className="font-semibold text-brand-dark mb-2"
+                    />
                     <div className="text-brand-gray text-sm space-y-1">
                       <p className="flex justify-between">
-                        <span>Dienstag</span>
+                        <EditableText
+                          value={content.kontaktDienstagLabel}
+                          onSave={(v) => handleSave('kontaktDienstagLabel', v)}
+                          as="span"
+                        />
                         <EditableText
                           value={content.schalterDi}
                           onSave={(v) => handleSave('schalterDi', v)}
@@ -205,7 +253,11 @@ export default function Kontakt() {
                         />
                       </p>
                       <p className="flex justify-between">
-                        <span>Donnerstag</span>
+                        <EditableText
+                          value={content.kontaktDonnerstagLabel}
+                          onSave={(v) => handleSave('kontaktDonnerstagLabel', v)}
+                          as="span"
+                        />
                         <EditableText
                           value={content.schalterDo}
                           onSave={(v) => handleSave('schalterDo', v)}
@@ -228,81 +280,124 @@ export default function Kontakt() {
             >
               {/* Contact Form */}
               <div className="bg-white p-8 rounded-3xl shadow-sm">
-                <h3 className="text-2xl font-display font-bold text-brand-dark mb-6">Schreiben Sie uns</h3>
+                <EditableText
+                  value={content.kontaktFormTitle}
+                  onSave={(v) => handleSave('kontaktFormTitle', v)}
+                  as="h3"
+                  className="text-2xl font-display font-bold text-brand-dark mb-6"
+                />
 
                 {sent ? (
                   <div className="text-center py-12">
                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Send className="w-8 h-8 text-green-600" />
                     </div>
-                    <h4 className="text-xl font-display font-bold text-brand-dark mb-2">Vielen Dank!</h4>
-                    <p className="text-brand-gray">Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns bei Ihnen.</p>
+                    <EditableText
+                      value={content.kontaktFormSuccessTitle}
+                      onSave={(v) => handleSave('kontaktFormSuccessTitle', v)}
+                      as="h4"
+                      className="text-xl font-display font-bold text-brand-dark mb-2"
+                    />
+                    <EditableText
+                      value={content.kontaktFormSuccessText}
+                      onSave={(v) => handleSave('kontaktFormSuccessText', v)}
+                      as="p"
+                      className="text-brand-gray"
+                    />
                     <button
                       onClick={() => setSent(false)}
                       className="mt-6 text-brand-red hover:underline text-sm font-semibold"
                     >
-                      Weitere Nachricht senden
+                      <EditableText
+                        value={content.kontaktFormSuccessButton}
+                        onSave={(v) => handleSave('kontaktFormSuccessButton', v)}
+                      />
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-brand-dark mb-1">Anrede</label>
+                      <label className="block text-sm font-medium text-brand-dark mb-1">
+                        <EditableText
+                          value={content.kontaktFormAnredeLabel}
+                          onSave={(v) => handleSave('kontaktFormAnredeLabel', v)}
+                        />
+                      </label>
                       <select
                         value={formData.anrede}
                         onChange={(e) => setFormData({ ...formData, anrede: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red transition-colors bg-white"
                         required
                       >
-                        <option value="">Bitte wählen</option>
-                        <option value="Herr">Herr</option>
-                        <option value="Frau">Frau</option>
+                        <option value="">{content.kontaktFormAnredePlaceholder}</option>
+                        <option value="Herr">{content.kontaktFormAnredeHerr}</option>
+                        <option value="Frau">{content.kontaktFormAnredeFrau}</option>
                       </select>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-brand-dark mb-1">Name</label>
+                      <label className="block text-sm font-medium text-brand-dark mb-1">
+                        <EditableText
+                          value={content.kontaktFormNameLabel}
+                          onSave={(v) => handleSave('kontaktFormNameLabel', v)}
+                        />
+                      </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red transition-colors"
-                        placeholder="Vor- und Nachname"
+                        placeholder={content.kontaktFormNamePlaceholder}
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-brand-dark mb-1">E-Mail</label>
+                      <label className="block text-sm font-medium text-brand-dark mb-1">
+                        <EditableText
+                          value={content.kontaktFormEmailLabel}
+                          onSave={(v) => handleSave('kontaktFormEmailLabel', v)}
+                        />
+                      </label>
                       <input
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red transition-colors"
-                        placeholder="ihre@email.ch"
+                        placeholder={content.kontaktFormEmailPlaceholder}
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-brand-dark mb-1">Telefon</label>
+                      <label className="block text-sm font-medium text-brand-dark mb-1">
+                        <EditableText
+                          value={content.kontaktFormTelefonLabel}
+                          onSave={(v) => handleSave('kontaktFormTelefonLabel', v)}
+                        />
+                      </label>
                       <input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red transition-colors"
-                        placeholder="+41 ..."
+                        placeholder={content.kontaktFormTelefonPlaceholder}
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-brand-dark mb-1">Nachricht</label>
+                      <label className="block text-sm font-medium text-brand-dark mb-1">
+                        <EditableText
+                          value={content.kontaktFormNachrichtLabel}
+                          onSave={(v) => handleSave('kontaktFormNachrichtLabel', v)}
+                        />
+                      </label>
                       <textarea
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         rows={5}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red transition-colors resize-none"
-                        placeholder="Ihre Nachricht..."
+                        placeholder={content.kontaktFormNachrichtPlaceholder}
                         required
                       />
                     </div>
@@ -312,9 +407,12 @@ export default function Kontakt() {
                       disabled={sending}
                       className="w-full bg-brand-red hover:bg-red-700 text-white px-6 py-3 rounded-full font-semibold transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
                     >
-                      {sending ? 'Wird gesendet...' : (
+                      {sending ? content.kontaktFormSendingText : (
                         <>
-                          Nachricht senden
+                          <EditableText
+                            value={content.kontaktFormSubmitButton}
+                            onSave={(v) => handleSave('kontaktFormSubmitButton', v)}
+                          />
                           <Send className="w-4 h-4" />
                         </>
                       )}
@@ -333,7 +431,7 @@ export default function Kontakt() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Standort RB Immobilien Treuhand AG"
+                  title={content.kontaktMapTitle}
                   className="h-[300px] w-full"
                 />
               </div>

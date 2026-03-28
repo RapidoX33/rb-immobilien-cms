@@ -94,12 +94,18 @@ export default function Objekte() {
           <div className="mb-10 bg-blue-50 border border-blue-200 rounded-2xl p-5 flex items-start gap-4">
             <Info className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
             <div className="text-sm text-blue-800">
-              <p className="font-semibold mb-1">Vorschau-Modus</p>
-              <p>
-                Die hier gezeigten Objekte dienen als Vorschau zur Veranschaulichung des neuen Designs.
-                Nach Ihrer Freigabe werden die Inserate mit den aktuellen Daten aus Ihrem Immobilienportal abgeglichen.
-                Auf Wunsch prüfen wir auch eine automatische Anbindung, damit neue Objekte künftig direkt übernommen werden.
+              <p className="font-semibold mb-1">
+                <EditableText
+                  value={content.objektePreviewTitle}
+                  onSave={(v) => handleSave('objektePreviewTitle', v)}
+                />
               </p>
+              <EditableText
+                value={content.objektePreviewText}
+                onSave={(v) => handleSave('objektePreviewText', v)}
+                as="p"
+                multiline
+              />
             </div>
           </div>
 
@@ -122,7 +128,12 @@ export default function Objekte() {
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10">Mietobjekte</span>
+                <span className="relative z-10">
+                  <EditableText
+                    value={content.objekteTabMieten}
+                    onSave={(v) => handleSave('objekteTabMieten', v)}
+                  />
+                </span>
               </button>
               <button
                 onClick={() => switchTab('kaufen')}
@@ -140,7 +151,12 @@ export default function Objekte() {
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10">Kaufobjekte</span>
+                <span className="relative z-10">
+                  <EditableText
+                    value={content.objekteTabKaufen}
+                    onSave={(v) => handleSave('objekteTabKaufen', v)}
+                  />
+                </span>
               </button>
             </div>
           </div>
@@ -197,7 +213,7 @@ export default function Objekte() {
                             {property.rooms !== null && (
                               <div className="flex items-center gap-2 text-sm text-brand-gray">
                                 <Home className="w-4 h-4 text-brand-red/70" />
-                                <span>{property.rooms} Zimmer</span>
+                                <span>{property.rooms} <EditableText value={content.objekteZimmerLabel} onSave={(v) => handleSave('objekteZimmerLabel', v)} /></span>
                               </div>
                             )}
                             {property.area !== null && (
@@ -208,7 +224,10 @@ export default function Objekte() {
                             )}
                           </div>
                           <div className="flex items-center gap-1.5 text-brand-red font-semibold text-sm group-hover:gap-3 transition-all mt-auto pt-2">
-                            Details ansehen
+                            <EditableText
+                              value={content.objekteDetailsLink}
+                              onSave={(v) => handleSave('objekteDetailsLink', v)}
+                            />
                             <ArrowRight className="w-4 h-4" />
                           </div>
                         </div>
@@ -226,17 +245,27 @@ export default function Objekte() {
                   <div className="w-20 h-20 bg-brand-red/10 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Building2 className="w-10 h-10 text-brand-red" />
                   </div>
-                  <h2 className="text-2xl font-display font-bold text-brand-dark mb-3">
-                    Aktuell keine {activeTab === 'mieten' ? 'Mietobjekte' : 'Kaufobjekte'}
-                  </h2>
-                  <p className="text-brand-gray max-w-md mx-auto mb-8">
-                    Derzeit sind keine {activeTab === 'mieten' ? 'Mietobjekte' : 'Kaufobjekte'} verfügbar. Bitte schauen Sie später wieder vorbei oder kontaktieren Sie uns direkt.
-                  </p>
+                  <EditableText
+                    value={content.objekteEmptyTitle}
+                    onSave={(v) => handleSave('objekteEmptyTitle', v)}
+                    as="h2"
+                    className="text-2xl font-display font-bold text-brand-dark mb-3"
+                  />
+                  <EditableText
+                    value={content.objekteEmptyText}
+                    onSave={(v) => handleSave('objekteEmptyText', v)}
+                    as="p"
+                    multiline
+                    className="text-brand-gray max-w-md mx-auto mb-8"
+                  />
                   <Link
                     to="/kontakt"
                     className="inline-flex items-center gap-2 bg-brand-red text-white px-6 py-3 rounded-full font-semibold hover:bg-brand-red/90 transition-colors"
                   >
-                    Kontaktieren Sie uns
+                    <EditableText
+                      value={content.objekteEmptyButton}
+                      onSave={(v) => handleSave('objekteEmptyButton', v)}
+                    />
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </motion.div>

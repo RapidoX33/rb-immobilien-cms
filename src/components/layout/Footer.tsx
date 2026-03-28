@@ -32,7 +32,12 @@ export function Footer() {
 
           {/* Standort Column */}
           <div className="space-y-4">
-            <h4 className="text-lg font-display font-semibold text-white">Standort</h4>
+            <EditableText
+              value={content.footerStandortTitle}
+              onSave={(v) => handleSave('footerStandortTitle', v)}
+              as="h4"
+              className="text-lg font-display font-semibold text-white"
+            />
             <div className="text-gray-400 space-y-1">
               <EditableText
                 value={content.companyName}
@@ -57,7 +62,12 @@ export function Footer() {
 
           {/* Kontakt Column */}
           <div className="space-y-4">
-            <h4 className="text-lg font-display font-semibold text-white">Kontakt</h4>
+            <EditableText
+              value={content.footerKontaktTitle}
+              onSave={(v) => handleSave('footerKontaktTitle', v)}
+              as="h4"
+              className="text-lg font-display font-semibold text-white"
+            />
             <div className="text-gray-400 space-y-2">
               <p className="flex items-center gap-2">
                 <span className="text-brand-red">T</span>
@@ -89,7 +99,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <span>&copy; {new Date().getFullYear()} RB Immobilien Treuhand AG. Alle Rechte vorbehalten.</span>
+          <span>&copy; {new Date().getFullYear()} <EditableText value={content.footerCopyright} onSave={(v) => handleSave('footerCopyright', v)} /></span>
           <div className="flex items-center gap-6">
             <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
             <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>

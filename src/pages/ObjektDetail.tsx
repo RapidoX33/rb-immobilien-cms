@@ -91,18 +91,27 @@ export default function ObjektDetail() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center"
         >
-          <h1 className="text-3xl font-display font-bold text-brand-dark mb-4">
-            Objekt nicht gefunden
-          </h1>
-          <p className="text-brand-gray mb-8">
-            Das gesuchte Objekt existiert nicht oder wurde entfernt.
-          </p>
+          <EditableText
+            value={content.detailNotFoundTitle}
+            onSave={(v) => handleSave('detailNotFoundTitle', v)}
+            as="h1"
+            className="text-3xl font-display font-bold text-brand-dark mb-4"
+          />
+          <EditableText
+            value={content.detailNotFoundText}
+            onSave={(v) => handleSave('detailNotFoundText', v)}
+            as="p"
+            className="text-brand-gray mb-8"
+          />
           <Link
             to="/"
             className="inline-flex items-center gap-2 bg-brand-red text-white px-6 py-3 rounded-full font-semibold hover:bg-brand-red/90 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Zur Startseite
+            <EditableText
+              value={content.detailNotFoundButton}
+              onSave={(v) => handleSave('detailNotFoundButton', v)}
+            />
           </Link>
         </motion.div>
       </div>
@@ -110,13 +119,12 @@ export default function ObjektDetail() {
   }
 
   const backLink = property.type === 'mieten' ? '/objekte?typ=mieten' : '/objekte?typ=kaufen';
-  const backLabel = property.type === 'mieten' ? 'Mietobjekte' : 'Kaufobjekte';
 
   const keyFacts = [
-    { label: 'Zimmer', value: property.rooms !== null ? `${property.rooms}` : '-', icon: Home },
-    { label: 'Fläche', value: property.area !== null ? `${property.area} m\u00B2` : '-', icon: Maximize },
-    { label: 'Stockwerk', value: property.floor || '-', icon: Building },
-    { label: 'Verfügbar', value: property.available || '-', icon: Calendar },
+    { labelKey: 'detailLabelZimmer' as const, value: property.rooms !== null ? `${property.rooms}` : '-', icon: Home },
+    { labelKey: 'detailLabelFlaeche' as const, value: property.area !== null ? `${property.area} m\u00B2` : '-', icon: Maximize },
+    { labelKey: 'detailLabelStockwerk' as const, value: property.floor || '-', icon: Building },
+    { labelKey: 'detailLabelVerfuegbar' as const, value: property.available || '-', icon: Calendar },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -138,11 +146,17 @@ export default function ObjektDetail() {
             className="flex items-center gap-2 text-brand-gray hover:text-brand-red transition-colors text-sm font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
-            {backLabel}
+            <EditableText
+              value={property.type === 'mieten' ? content.objekteTabMieten : content.objekteTabKaufen}
+              onSave={(v) => handleSave(property.type === 'mieten' ? 'objekteTabMieten' : 'objekteTabKaufen', v)}
+            />
           </Link>
           <div className="flex items-center gap-2">
             <span className="bg-brand-red/10 text-brand-red px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
-              {property.type === 'mieten' ? 'Miete' : 'Kauf'}
+              <EditableText
+                value={property.type === 'mieten' ? content.detailBadgeMiete : content.detailBadgeKauf}
+                onSave={(v) => handleSave(property.type === 'mieten' ? 'detailBadgeMiete' : 'detailBadgeKauf', v)}
+              />
             </span>
             <span className="bg-brand-light text-brand-dark px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
               {property.category}
@@ -237,14 +251,19 @@ export default function ObjektDetail() {
             >
               {keyFacts.map((fact) => (
                 <div
-                  key={fact.label}
+                  key={fact.labelKey}
                   className="bg-white p-6 rounded-3xl text-center shadow-sm"
                 >
                   <fact.icon className="w-6 h-6 text-brand-red mx-auto mb-2" />
                   <div className="text-xl font-display font-bold text-brand-dark">
                     {fact.value}
                   </div>
-                  <div className="text-sm text-brand-gray mt-1">{fact.label}</div>
+                  <div className="text-sm text-brand-gray mt-1">
+                    <EditableText
+                      value={content[fact.labelKey]}
+                      onSave={(v) => handleSave(fact.labelKey, v)}
+                    />
+                  </div>
                 </div>
               ))}
             </motion.div>
@@ -257,9 +276,12 @@ export default function ObjektDetail() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="bg-white p-8 rounded-3xl shadow-sm"
               >
-                <h2 className="text-xl font-display font-bold text-brand-dark mb-4">
-                  Beschreibung
-                </h2>
+                <EditableText
+                  value={content.detailBeschreibungTitle}
+                  onSave={(v) => handleSave('detailBeschreibungTitle', v)}
+                  as="h2"
+                  className="text-xl font-display font-bold text-brand-dark mb-4"
+                />
                 <EditableText
                   value={property.description}
                   onSave={(v) => updateProperty('description', v)}
@@ -278,9 +300,12 @@ export default function ObjektDetail() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="bg-white p-8 rounded-3xl shadow-sm"
               >
-                <h2 className="text-xl font-display font-bold text-brand-dark mb-4">
-                  Ausstattung
-                </h2>
+                <EditableText
+                  value={content.detailAusstattungTitle}
+                  onSave={(v) => handleSave('detailAusstattungTitle', v)}
+                  as="h2"
+                  className="text-xl font-display font-bold text-brand-dark mb-4"
+                />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {property.features.map((feature, i) => (
                     <div key={i} className="flex items-center gap-3 text-brand-gray">
@@ -365,13 +390,16 @@ export default function ObjektDetail() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="bg-brand-dark p-6 rounded-3xl"
               >
-                <h3 className="text-lg font-display font-bold text-white mb-4">
-                  Anfrage senden
-                </h3>
+                <EditableText
+                  value={content.detailAnfrageTitle}
+                  onSave={(v) => handleSave('detailAnfrageTitle', v)}
+                  as="h3"
+                  className="text-lg font-display font-bold text-white mb-4"
+                />
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input
                     type="text"
-                    placeholder="Name"
+                    placeholder={content.detailFormName}
                     value={formData.name}
                     onChange={(e) =>
                       setFormData((prev) => ({ ...prev, name: e.target.value }))
@@ -381,7 +409,7 @@ export default function ObjektDetail() {
                   />
                   <input
                     type="email"
-                    placeholder="E-Mail"
+                    placeholder={content.detailFormEmail}
                     value={formData.email}
                     onChange={(e) =>
                       setFormData((prev) => ({ ...prev, email: e.target.value }))
@@ -391,7 +419,7 @@ export default function ObjektDetail() {
                   />
                   <input
                     type="tel"
-                    placeholder="Telefon"
+                    placeholder={content.detailFormTelefon}
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData((prev) => ({ ...prev, phone: e.target.value }))
@@ -399,7 +427,7 @@ export default function ObjektDetail() {
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-brand-red transition-colors text-sm"
                   />
                   <textarea
-                    placeholder="Nachricht"
+                    placeholder={content.detailFormNachricht}
                     rows={4}
                     value={formData.message}
                     onChange={(e) =>
@@ -413,7 +441,10 @@ export default function ObjektDetail() {
                     className="w-full bg-brand-red text-white py-3 rounded-xl font-semibold hover:bg-brand-red/90 transition-colors flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
-                    Anfrage senden
+                    <EditableText
+                      value={content.detailAnfrageButton}
+                      onSave={(v) => handleSave('detailAnfrageButton', v)}
+                    />
                   </button>
                 </form>
               </motion.div>

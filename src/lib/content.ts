@@ -102,6 +102,20 @@ export interface SiteContent {
   schalterDo: string;
   googleMapsUrl: string;
 
+  // Home - card link text
+  homeCardLinkText: string;
+
+  // Objekte Page
+  objektePreviewTitle: string;
+  objektePreviewText: string;
+  objekteTabMieten: string;
+  objekteTabKaufen: string;
+  objekteZimmerLabel: string;
+  objekteDetailsLink: string;
+  objekteEmptyTitle: string;
+  objekteEmptyText: string;
+  objekteEmptyButton: string;
+
   // Mietobjekte
   mietHeroImage: string;
   mietTitle: string;
@@ -115,19 +129,83 @@ export interface SiteContent {
   // Properties
   properties: PropertyItem[];
 
+  // ObjektDetail Page
+  detailNotFoundTitle: string;
+  detailNotFoundText: string;
+  detailNotFoundButton: string;
+  detailBadgeMiete: string;
+  detailBadgeKauf: string;
+  detailLabelZimmer: string;
+  detailLabelFlaeche: string;
+  detailLabelStockwerk: string;
+  detailLabelVerfuegbar: string;
+  detailBeschreibungTitle: string;
+  detailAusstattungTitle: string;
+  detailAnfrageTitle: string;
+  detailAnfrageButton: string;
+  detailFormName: string;
+  detailFormEmail: string;
+  detailFormTelefon: string;
+  detailFormNachricht: string;
+
+  // Kontakt Page
+  kontaktAdresseLabel: string;
+  kontaktTelefonFaxLabel: string;
+  kontaktTelPrefix: string;
+  kontaktFaxPrefix: string;
+  kontaktEmailLabel: string;
+  kontaktOeffnungszeitenTitle: string;
+  kontaktTelefonSection: string;
+  kontaktMoDoLabel: string;
+  kontaktFrLabel: string;
+  kontaktSchalterSection: string;
+  kontaktDienstagLabel: string;
+  kontaktDonnerstagLabel: string;
+  kontaktFormTitle: string;
+  kontaktFormSuccessTitle: string;
+  kontaktFormSuccessText: string;
+  kontaktFormSuccessButton: string;
+  kontaktFormAnredeLabel: string;
+  kontaktFormAnredePlaceholder: string;
+  kontaktFormAnredeHerr: string;
+  kontaktFormAnredeFrau: string;
+  kontaktFormNameLabel: string;
+  kontaktFormNamePlaceholder: string;
+  kontaktFormEmailLabel: string;
+  kontaktFormEmailPlaceholder: string;
+  kontaktFormTelefonLabel: string;
+  kontaktFormTelefonPlaceholder: string;
+  kontaktFormNachrichtLabel: string;
+  kontaktFormNachrichtPlaceholder: string;
+  kontaktFormSubmitButton: string;
+  kontaktFormSendingText: string;
+  kontaktMapTitle: string;
+
   // Impressum
   impressumHeroImage: string;
+  impressumPageTitle: string;
+  impressumSectionKontakt: string;
+  impressumTelPrefix: string;
+  impressumFaxPrefix: string;
+  impressumEmailLabel: string;
+  impressumWebsite: string;
+  impressumWebsiteUrl: string;
   impressumCompanyName: string;
   impressumAddress: string;
   impressumZip: string;
   impressumCountry: string;
   impressumEmail: string;
+  impressumSectionPerson: string;
   impressumPerson: string;
+  impressumSectionHandelsregister: string;
+  impressumUIDLabel: string;
   impressumUID: string;
   impressumUIDLink: string;
 
   // Datenschutz
   datenschutzHeroImage: string;
+  datenschutzPageTitle: string;
+  datenschutzSourceText: string;
   datenschutzIntro: string;
   datenschutzUsage: string;
   datenschutzSecurity: string;
@@ -139,6 +217,9 @@ export interface SiteContent {
   footerPhone: string;
   footerFax: string;
   footerEmail: string;
+  footerStandortTitle: string;
+  footerKontaktTitle: string;
+  footerCopyright: string;
 }
 
 const defaultContent: SiteContent = {
@@ -215,6 +296,20 @@ const defaultContent: SiteContent = {
   schalterDo: '13.30 - 16.30',
   googleMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2693.303272635905!2d9.10842031562858!3d47.56191997918193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479af6a8a0b0b0b1%3A0x6b8b8b8b8b8b8b8b!2sBahnhofstrasse%2020%2C%208570%20Weinfelden!5e0!3m2!1sde!2sch!4v1620000000000!5m2!1sde!2sch',
 
+  // Home - card link text
+  homeCardLinkText: 'Mehr erfahren',
+
+  // Objekte Page
+  objektePreviewTitle: 'Vorschau-Modus',
+  objektePreviewText: 'Die hier gezeigten Objekte dienen als Vorschau zur Veranschaulichung des neuen Designs. Nach Ihrer Freigabe werden die Inserate mit den aktuellen Daten aus Ihrem Immobilienportal abgeglichen. Auf Wunsch prüfen wir auch eine automatische Anbindung, damit neue Objekte künftig direkt übernommen werden.',
+  objekteTabMieten: 'Mietobjekte',
+  objekteTabKaufen: 'Kaufobjekte',
+  objekteZimmerLabel: 'Zimmer',
+  objekteDetailsLink: 'Details ansehen',
+  objekteEmptyTitle: 'Aktuell keine Objekte',
+  objekteEmptyText: 'Derzeit sind keine Objekte verfügbar. Bitte schauen Sie später wieder vorbei oder kontaktieren Sie uns direkt.',
+  objekteEmptyButton: 'Kontaktieren Sie uns',
+
   // Mietobjekte
   mietHeroImage: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
   mietTitle: 'Mietobjekte',
@@ -248,19 +343,83 @@ const defaultContent: SiteContent = {
     { id: '5804605', title: '3½ Zimmer-Erdgeschosswohnung mit grossem Sitzplatz', type: 'mieten', category: 'Wohnung', price: "CHF 1'665", priceDetail: 'Bruttomiete / Monat', netPrice: "CHF 1'430", extraCosts: 'CHF 235', location: 'Bürglen TG', address: 'Bahnhofstrasse 15, 8575 Bürglen TG', rooms: 3.5, area: 75.6, floor: 'Erdgeschoss', available: 'nach Vereinbarung', objectNumber: '002', description: 'Attraktive EG-Wohnung. Küche/Wohnzimmer/Korridor mit Plattenböden, übrige Zimmer mit Designbelag. Offene Küche mit Glaskeramikherd, Geschirrspüler.\n\nGrosszügiger, überdachter Sitzplatz (Süd-/Westseite) mit Geräteraum. Nasszelle mit Dusche. Eigener Waschturm. Kellerabteil, Lift. TG-Platz CHF 125/Mt. oder Aussenplatz CHF 70/Mt. möglich.', features: ['Erdgeschoss', 'Grosser Sitzplatz', 'Plattenböden', 'Offene Küche', 'Eigener Waschturm', 'Lift', 'Kellerabteil', 'TG-Platz möglich'], images: ['https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'], agent: { name: 'Immobilien Altwegg AG', role: 'Partner / Herr Jörg Altwegg', image: 'https://ui-avatars.com/api/?name=Joerg+Altwegg&background=f4f4f4&color=d70034&size=512', phone: '+41 71 657 22 29', email: 'info@rbimmobilien.ch' } },
   ],
 
+  // ObjektDetail Page
+  detailNotFoundTitle: 'Objekt nicht gefunden',
+  detailNotFoundText: 'Das gesuchte Objekt existiert nicht oder wurde entfernt.',
+  detailNotFoundButton: 'Zur Startseite',
+  detailBadgeMiete: 'Miete',
+  detailBadgeKauf: 'Kauf',
+  detailLabelZimmer: 'Zimmer',
+  detailLabelFlaeche: 'Fläche',
+  detailLabelStockwerk: 'Stockwerk',
+  detailLabelVerfuegbar: 'Verfügbar',
+  detailBeschreibungTitle: 'Beschreibung',
+  detailAusstattungTitle: 'Ausstattung',
+  detailAnfrageTitle: 'Anfrage senden',
+  detailAnfrageButton: 'Anfrage senden',
+  detailFormName: 'Name',
+  detailFormEmail: 'E-Mail',
+  detailFormTelefon: 'Telefon',
+  detailFormNachricht: 'Nachricht',
+
+  // Kontakt Page
+  kontaktAdresseLabel: 'Adresse',
+  kontaktTelefonFaxLabel: 'Telefon & Fax',
+  kontaktTelPrefix: 'Tel:',
+  kontaktFaxPrefix: 'Fax:',
+  kontaktEmailLabel: 'E-Mail',
+  kontaktOeffnungszeitenTitle: 'Öffnungszeiten',
+  kontaktTelefonSection: 'Telefon',
+  kontaktMoDoLabel: 'Mo - Do',
+  kontaktFrLabel: 'Fr',
+  kontaktSchalterSection: 'Schalter',
+  kontaktDienstagLabel: 'Dienstag',
+  kontaktDonnerstagLabel: 'Donnerstag',
+  kontaktFormTitle: 'Schreiben Sie uns',
+  kontaktFormSuccessTitle: 'Vielen Dank!',
+  kontaktFormSuccessText: 'Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns bei Ihnen.',
+  kontaktFormSuccessButton: 'Weitere Nachricht senden',
+  kontaktFormAnredeLabel: 'Anrede',
+  kontaktFormAnredePlaceholder: 'Bitte wählen',
+  kontaktFormAnredeHerr: 'Herr',
+  kontaktFormAnredeFrau: 'Frau',
+  kontaktFormNameLabel: 'Name',
+  kontaktFormNamePlaceholder: 'Vor- und Nachname',
+  kontaktFormEmailLabel: 'E-Mail',
+  kontaktFormEmailPlaceholder: 'ihre@email.ch',
+  kontaktFormTelefonLabel: 'Telefon',
+  kontaktFormTelefonPlaceholder: '+41 ...',
+  kontaktFormNachrichtLabel: 'Nachricht',
+  kontaktFormNachrichtPlaceholder: 'Ihre Nachricht...',
+  kontaktFormSubmitButton: 'Nachricht senden',
+  kontaktFormSendingText: 'Wird gesendet...',
+  kontaktMapTitle: 'Standort RB Immobilien Treuhand AG',
+
   // Impressum
   impressumHeroImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+  impressumPageTitle: 'Impressum',
+  impressumSectionKontakt: 'Kontakt-Adresse',
+  impressumTelPrefix: 'T',
+  impressumFaxPrefix: 'F',
+  impressumEmailLabel: 'E-Mail:',
+  impressumWebsite: 'www.rbimmobilien.ch',
+  impressumWebsiteUrl: 'https://www.rbimmobilien.ch',
   impressumCompanyName: 'RB Immobilien Treuhand AG',
   impressumAddress: 'Marktplatz 3',
   impressumZip: '8570 Weinfelden',
   impressumCountry: 'Schweiz',
   impressumEmail: 'info@rbimmobilien.ch',
+  impressumSectionPerson: 'Vertretungsberechtigte Person',
   impressumPerson: 'Mara Schönholzer',
+  impressumSectionHandelsregister: 'Handelsregister-Eintrag',
+  impressumUIDLabel: 'UID:',
   impressumUID: 'CHE-109.896.591',
   impressumUIDLink: 'https://www.uid.admin.ch/Detail.aspx?uid_id=CHE-109.896.591',
 
   // Datenschutz
   datenschutzHeroImage: 'https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+  datenschutzPageTitle: 'Datenschutzerklärung',
+  datenschutzSourceText: 'Basierend auf dsat.ch',
   datenschutzIntro: 'Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.',
   datenschutzUsage: 'Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.',
   datenschutzSecurity: 'Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.',
@@ -272,6 +431,9 @@ const defaultContent: SiteContent = {
   footerPhone: '+41 71 626 01 01',
   footerFax: '+41 71 626 01 02',
   footerEmail: 'info@rbimmobilien.ch',
+  footerStandortTitle: 'Standort',
+  footerKontaktTitle: 'Kontakt',
+  footerCopyright: 'RB Immobilien Treuhand AG. Alle Rechte vorbehalten.',
 };
 
 export async function getContent(): Promise<SiteContent> {

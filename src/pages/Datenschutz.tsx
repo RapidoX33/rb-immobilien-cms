@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { useContent } from '../lib/contentContext';
-import { EditableImage } from '../components/Editable';
+import { EditableText, EditableImage } from '../components/Editable';
 
 const sections = [
   {
@@ -70,14 +70,18 @@ export default function Datenschutz() {
         />
         <div className="absolute inset-0 bg-brand-dark/60" />
         <div className="relative z-10 text-center text-white">
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="font-display text-5xl md:text-6xl font-bold"
           >
-            Datenschutzerkl&auml;rung
-          </motion.h1>
+            <EditableText
+              value={content.datenschutzPageTitle}
+              onSave={(v) => handleSave('datenschutzPageTitle', v)}
+              as="h1"
+              className="font-display text-5xl md:text-6xl font-bold"
+            />
+          </motion.div>
         </div>
       </section>
 
@@ -104,7 +108,10 @@ export default function Datenschutz() {
 
             {/* Source */}
             <div className="mt-12 pt-6 border-t border-gray-200 text-sm text-brand-gray/60">
-              Basierend auf dsat.ch
+              <EditableText
+                value={content.datenschutzSourceText}
+                onSave={(v) => handleSave('datenschutzSourceText', v)}
+              />
             </div>
           </motion.div>
         </div>
