@@ -80,7 +80,7 @@ export default function Team() {
                     src={member.image}
                     onSave={(url) => updateMember(member.id, 'image', url)}
                     className="aspect-square w-full"
-                    imgClassName="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    imgClassName="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                     alt={member.name}
                   />
                 </div>
