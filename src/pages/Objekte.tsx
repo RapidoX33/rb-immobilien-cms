@@ -148,6 +148,7 @@ export default function Objekte() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: '-50px' }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="h-full"
                     >
                       <Link
                         to={`/objekt/${property.id}`}
@@ -179,7 +180,7 @@ export default function Objekte() {
                             <MapPin className="w-4 h-4 text-brand-red flex-shrink-0" />
                             <span className="truncate">{property.address}</span>
                           </div>
-                          <div className="grid grid-cols-2 gap-3 mb-4">
+                          <div className="grid grid-cols-2 gap-3 mb-4 min-h-[28px]">
                             {property.rooms !== null && (
                               <div className="flex items-center gap-2 text-sm text-brand-gray">
                                 <Home className="w-4 h-4 text-brand-red/70" />
