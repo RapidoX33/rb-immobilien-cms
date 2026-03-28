@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
@@ -18,13 +18,16 @@ import { useContent } from '../lib/contentContext';
 import { cn } from '../lib/utils';
 
 function FadeImg({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
+  const imgRef = useRef<HTMLImageElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
+  useEffect(() => { setLoaded(false); setError(false); }, [src]);
+  useEffect(() => { if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) setLoaded(true); }, [src]);
   return (
     <div className="relative w-full h-full">
-      {!loaded && !error && <div className="absolute inset-0 bg-gray-100 animate-pulse rounded-inherit" />}
+      {!loaded && !error && <div className="absolute inset-0 bg-gray-100 animate-pulse" />}
       {error && <div className="absolute inset-0 bg-gray-100 flex items-center justify-center"><ImageIcon className="w-8 h-8 text-gray-300" /></div>}
-      <img src={src} alt={alt} className={cn(className, 'transition-opacity duration-500', loaded ? 'opacity-100' : 'opacity-0')} loading="lazy" referrerPolicy="no-referrer" onLoad={() => setLoaded(true)} onError={() => setError(true)} {...props} />
+      <img ref={imgRef} src={src} alt={alt} className={cn(className, 'transition-opacity duration-500', loaded ? 'opacity-100' : 'opacity-0')} referrerPolicy="no-referrer" onLoad={() => setLoaded(true)} onError={() => setError(true)} {...props} />
     </div>
   );
 }

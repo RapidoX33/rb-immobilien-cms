@@ -64,8 +64,20 @@ export function EditableText({ value, onSave, className = '', multiline = false,
 }
 
 function FadeImg({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
+  const imgRef = useRef<HTMLImageElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setLoaded(false);
+    setError(false);
+  }, [src]);
+
+  useEffect(() => {
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setLoaded(true);
+    }
+  }, [src]);
 
   return (
     <div className="relative w-full h-full">
@@ -78,10 +90,10 @@ function FadeImg({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTML
         </div>
       )}
       <img
+        ref={imgRef}
         src={src}
         alt={alt}
         className={cn(className, 'transition-opacity duration-500', loaded ? 'opacity-100' : 'opacity-0')}
-        loading="lazy"
         referrerPolicy="no-referrer"
         onLoad={() => setLoaded(true)}
         onError={() => setError(true)}
