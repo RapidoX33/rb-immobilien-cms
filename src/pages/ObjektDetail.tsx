@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useContent } from '../lib/contentContext';
 import { cn } from '../lib/utils';
+import { ImageLightbox } from '../components/ImageLightbox';
 
 function FadeImg({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
   const imgRef = useRef<HTMLImageElement>(null);
@@ -41,6 +42,7 @@ export default function ObjektDetail() {
     phone: '',
     message: '',
   });
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -128,43 +130,29 @@ export default function ObjektDetail() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         {property.images.length >= 3 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Main Image */}
-            <div className="md:col-span-2 relative rounded-3xl overflow-hidden group aspect-[16/10]">
-              <FadeImg
-                src={property.images[0]}
-                alt={property.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+            <div className="md:col-span-2 relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(0)}>
+              <FadeImg src={property.images[0]} alt={property.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             </div>
-            {/* Side Images */}
             <div className="hidden md:grid grid-rows-2 gap-4">
-              <div className="relative rounded-3xl overflow-hidden group aspect-[16/10]">
-                <FadeImg
-                  src={property.images[1]}
-                  alt={`${property.title} 2`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+              <div className="relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(1)}>
+                <FadeImg src={property.images[1]} alt={`${property.title} 2`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-              <div className="relative rounded-3xl overflow-hidden group aspect-[16/10]">
-                <FadeImg
-                  src={property.images[2]}
-                  alt={`${property.title} 3`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+              <div className="relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(2)}>
+                <FadeImg src={property.images[2]} alt={`${property.title} 3`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
             </div>
           </div>
         ) : property.images.length === 2 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="relative rounded-3xl overflow-hidden group aspect-[16/10]">
+            <div className="relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(0)}>
               <FadeImg src={property.images[0]} alt={property.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             </div>
-            <div className="relative rounded-3xl overflow-hidden group aspect-[16/10]">
+            <div className="relative rounded-3xl overflow-hidden group aspect-[16/10] cursor-pointer" onClick={() => setLightboxIndex(1)}>
               <FadeImg src={property.images[1]} alt={`${property.title} 2`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             </div>
           </div>
         ) : (
-          <div className="relative rounded-3xl overflow-hidden group aspect-[16/9] max-h-[500px]">
+          <div className="relative rounded-3xl overflow-hidden group aspect-[16/9] max-h-[500px] cursor-pointer" onClick={() => setLightboxIndex(0)}>
             <FadeImg src={property.images[0]} alt={property.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
         )}
@@ -367,6 +355,15 @@ export default function ObjektDetail() {
           </div>
         </div>
       </section>
+
+      {/* Image Lightbox */}
+      {lightboxIndex !== null && (
+        <ImageLightbox
+          images={property.images}
+          initialIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+        />
+      )}
     </>
   );
 }
