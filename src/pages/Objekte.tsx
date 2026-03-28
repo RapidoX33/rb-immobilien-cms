@@ -1,10 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { MapPin, Home, Maximize, ArrowRight, Building2, Info } from 'lucide-react';
+import { MapPin, Home, Maximize, ArrowRight, Building2, Info, Image as ImageIcon } from 'lucide-react';
 import { useContent } from '../lib/contentContext';
 import { EditableText, EditableImage } from '../components/Editable';
 import { cn } from '../lib/utils';
+
+function FadeImg({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  return (
+    <div className="relative w-full h-full">
+      {!loaded && !error && <div className="absolute inset-0 bg-gray-100 animate-pulse" />}
+      {error && <div className="absolute inset-0 bg-gray-100 flex items-center justify-center"><ImageIcon className="w-8 h-8 text-gray-300" /></div>}
+      <img src={src} alt={alt} className={cn(className, 'transition-opacity duration-500', loaded ? 'opacity-100' : 'opacity-0')} loading="lazy" referrerPolicy="no-referrer" onLoad={() => setLoaded(true)} onError={() => setError(true)} {...props} />
+    </div>
+  );
+}
 
 type TabType = 'mieten' | 'kaufen';
 
@@ -39,7 +51,7 @@ export default function Objekte() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center overflow-hidden pt-24">
         <div className="absolute inset-0 w-full h-full">
           <EditableImage
             src={heroImage}
@@ -156,12 +168,10 @@ export default function Objekte() {
                       >
                         {/* Image */}
                         <div className="relative aspect-[4/3] overflow-hidden flex-shrink-0">
-                          <img
+                          <FadeImg
                             src={property.images[0]}
                             alt={property.title}
-                            loading="lazy"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            referrerPolicy="no-referrer"
                           />
                           <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold text-brand-dark tracking-wide">
                             {property.category}

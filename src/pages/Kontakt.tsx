@@ -39,7 +39,7 @@ export default function Kontakt() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[40vh] flex items-center justify-center">
+      <section className="relative h-[40vh] flex items-center justify-center pt-24">
         <div className="absolute inset-0 w-full h-full">
           <EditableImage
             src={content.contactHeroImage}

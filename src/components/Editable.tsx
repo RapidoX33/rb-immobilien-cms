@@ -63,6 +63,34 @@ export function EditableText({ value, onSave, className = '', multiline = false,
   );
 }
 
+function FadeImg({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  return (
+    <div className="relative w-full h-full">
+      {!loaded && !error && (
+        <div className="absolute inset-0 bg-gray-100 animate-pulse" />
+      )}
+      {error && (
+        <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+          <ImageIcon className="w-8 h-8 text-gray-300" />
+        </div>
+      )}
+      <img
+        src={src}
+        alt={alt}
+        className={cn(className, 'transition-opacity duration-500', loaded ? 'opacity-100' : 'opacity-0')}
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        onLoad={() => setLoaded(true)}
+        onError={() => setError(true)}
+        {...props}
+      />
+    </div>
+  );
+}
+
 interface EditableImageProps {
   src: string;
   onSave: (url: string) => void;
@@ -91,11 +119,11 @@ export function EditableImage({ src, onSave, className, alt, imgClassName }: Edi
     }
   };
 
-  if (!isAdmin) return <img src={src} alt={alt} className={imgClassName || className} referrerPolicy="no-referrer" loading="lazy" />;
+  if (!isAdmin) return <FadeImg src={src} alt={alt} className={imgClassName || className} />;
 
   return (
     <div className={`relative group cursor-pointer ${className || ''}`} onClick={(e) => { e.stopPropagation(); if (!uploading) fileRef.current?.click(); }}>
-      <img src={src} alt={alt} className={imgClassName || 'w-full h-full object-cover'} referrerPolicy="no-referrer" loading="lazy" />
+      <FadeImg src={src} alt={alt} className={imgClassName || 'w-full h-full object-cover'} />
       <div className={cn(
         "absolute inset-0 bg-black/50 flex items-center justify-center transition-opacity z-10",
         uploading ? "opacity-100" : "opacity-0 group-hover:opacity-100"

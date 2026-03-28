@@ -12,8 +12,22 @@ import {
   Mail,
   Check,
   Send,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { useContent } from '../lib/contentContext';
+import { cn } from '../lib/utils';
+
+function FadeImg({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  return (
+    <div className="relative w-full h-full">
+      {!loaded && !error && <div className="absolute inset-0 bg-gray-100 animate-pulse rounded-inherit" />}
+      {error && <div className="absolute inset-0 bg-gray-100 flex items-center justify-center"><ImageIcon className="w-8 h-8 text-gray-300" /></div>}
+      <img src={src} alt={alt} className={cn(className, 'transition-opacity duration-500', loaded ? 'opacity-100' : 'opacity-0')} loading="lazy" referrerPolicy="no-referrer" onLoad={() => setLoaded(true)} onError={() => setError(true)} {...props} />
+    </div>
+  );
+}
 
 export default function ObjektDetail() {
   const { id } = useParams<{ id: string }>();
@@ -112,32 +126,29 @@ export default function ObjektDetail() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[40vh] md:h-[60vh]">
           {/* Main Image */}
           <div className="md:col-span-2 relative rounded-3xl overflow-hidden group">
-            <img
+            <FadeImg
               src={property.images[0]}
               alt={property.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              referrerPolicy="no-referrer"
             />
           </div>
           {/* Side Images */}
           <div className="hidden md:grid grid-rows-2 gap-4">
             {property.images[1] && (
               <div className="relative rounded-3xl overflow-hidden group">
-                <img
+                <FadeImg
                   src={property.images[1]}
                   alt={`${property.title} 2`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             )}
             {property.images[2] && (
               <div className="relative rounded-3xl overflow-hidden group">
-                <img
+                <FadeImg
                   src={property.images[2]}
                   alt={`${property.title} 3`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             )}
@@ -247,12 +258,13 @@ export default function ObjektDetail() {
                 className="bg-white p-6 rounded-3xl shadow-sm"
               >
                 <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={property.agent.image}
-                    alt={property.agent.name}
-                    className="w-16 h-16 rounded-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
+                  <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                    <FadeImg
+                      src={property.agent.image}
+                      alt={property.agent.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <div>
                     <h3 className="font-display font-bold text-brand-dark">
                       {property.agent.name}

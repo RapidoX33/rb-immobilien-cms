@@ -60,7 +60,7 @@ export default function Datenschutz() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[30vh] min-h-[300px] flex items-center justify-center">
+      <section className="relative h-[30vh] min-h-[300px] flex items-center justify-center pt-24">
         <EditableImage
           src={content.datenschutzHeroImage}
           onSave={(url) => handleSave('datenschutzHeroImage', url)}

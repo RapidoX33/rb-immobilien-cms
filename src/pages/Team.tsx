@@ -28,7 +28,7 @@ export default function Team() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center">
+      <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center pt-24">
         <div className="absolute inset-0 w-full h-full">
           <EditableImage
             src={content.teamHeroImage}
@@ -79,7 +79,7 @@ export default function Team() {
                   <EditableImage
                     src={member.image}
                     onSave={(url) => updateMember(member.id, 'image', url)}
-                    className="aspect-[4/5] w-full"
+                    className="aspect-square w-full"
                     imgClassName="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                     alt={member.name}
                   />
