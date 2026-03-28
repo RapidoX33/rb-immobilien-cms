@@ -102,34 +102,30 @@ export default function Team() {
                     className="text-brand-red font-medium mt-1"
                   />
 
-                  {/* Qualifications - always 2 slots in admin, only filled in public */}
-                  {(() => {
-                    const maxSlots = 2;
-                    const slots = isAdmin
-                      ? Array.from({ length: maxSlots }, (_, i) => member.qualifications[i] || '')
-                      : member.qualifications.filter(q => q.trim() !== '');
-                    return (
-                      <div className="mt-3 flex-grow">
-                        {slots.length > 0 ? (
-                          <ul className="space-y-1">
-                            {slots.map((qual, qi) => (
-                              <li key={qi} className="text-sm text-brand-gray">
-                                <EditableText
-                                  value={qual}
-                                  onSave={(v) => {
-                                    const newQuals = Array.from({ length: maxSlots }, (_, i) => member.qualifications[i] || '');
-                                    newQuals[qi] = v;
-                                    updateMember(member.id, 'qualifications', newQuals.filter(q => q.trim() !== ''));
-                                  }}
-                                  as="span"
-                                />
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-                      </div>
-                    );
-                  })()}
+                  {/* Qualifications - always 2 slots, flex-grow pushes contact down */}
+                  <div className="mt-3 flex-grow">
+                    <ul className="space-y-1">
+                      {Array.from({ length: 2 }, (_, qi) => {
+                        const qual = member.qualifications[qi] || '';
+                        const hasValue = qual.trim() !== '';
+                        // Public: hide empty slots. Admin: show all slots.
+                        if (!isAdmin && !hasValue) return <li key={qi} className="text-sm invisible">&nbsp;</li>;
+                        return (
+                          <li key={qi} className="text-sm text-brand-gray">
+                            <EditableText
+                              value={qual}
+                              onSave={(v) => {
+                                const newQuals = Array.from({ length: 2 }, (_, i) => member.qualifications[i] || '');
+                                newQuals[qi] = v;
+                                updateMember(member.id, 'qualifications', newQuals.filter(q => q.trim() !== ''));
+                              }}
+                              as="span"
+                            />
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
 
                   {/* Contact */}
                   <div className="mt-4 pt-4 border-t border-gray-100 space-y-2">
