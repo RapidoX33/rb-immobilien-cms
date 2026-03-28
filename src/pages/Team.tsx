@@ -2,10 +2,12 @@ import { motion } from 'motion/react';
 import { Mail, Phone, Smartphone } from 'lucide-react';
 import { useContent } from '../lib/contentContext';
 import { EditableText, EditableImage } from '../components/Editable';
+import { useAuth } from '../lib/auth';
 import type { TeamMember } from '../lib/content';
 
 export default function Team() {
   const { content, handleSave } = useContent();
+  const { isAdmin } = useAuth();
   if (!content) return null;
 
   const updateMember = (id: string, field: keyof TeamMember, value: any) => {
@@ -100,19 +102,34 @@ export default function Team() {
                     className="text-brand-red font-medium mt-1"
                   />
 
-                  {member.qualifications.length > 0 && (
-                    <ul className="mt-3 space-y-1">
-                      {member.qualifications.map((qual, qi) => (
-                        <li key={qi} className="text-sm text-brand-gray">
-                          <EditableText
-                            value={qual}
-                            onSave={(v) => updateMemberQualification(member.id, qi, v)}
-                            as="span"
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  {(() => {
+                    // In admin mode: always show 2 qualification slots
+                    // In public mode: only show filled qualifications
+                    const maxSlots = 2;
+                    const quals = isAdmin
+                      ? [...member.qualifications, ...Array(Math.max(0, maxSlots - member.qualifications.length)).fill('')]
+                      : member.qualifications.filter(q => q.trim() !== '');
+                    return quals.length > 0 ? (
+                      <ul className="mt-3 space-y-1 min-h-[3rem]">
+                        {quals.map((qual, qi) => (
+                          <li key={qi} className="text-sm text-brand-gray">
+                            <EditableText
+                              value={qual}
+                              onSave={(v) => {
+                                const newQuals = [...member.qualifications];
+                                while (newQuals.length <= qi) newQuals.push('');
+                                newQuals[qi] = v;
+                                updateMember(member.id, 'qualifications', newQuals.filter((q, i) => q.trim() !== '' || i < qi));
+                              }}
+                              as="span"
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="min-h-[3rem]" />
+                    );
+                  })()}
 
                   {/* Contact */}
                   <div className="mt-auto pt-5 border-t border-gray-100 space-y-2">
@@ -127,14 +144,14 @@ export default function Team() {
                         className="text-brand-red"
                       />
                     </a>
-                    {member.mobile && (
+                    {(member.mobile || isAdmin) && (
                       <a
-                        href={`tel:${member.mobile}`}
+                        href={`tel:${member.mobile || ''}`}
                         className="flex items-center gap-3 text-sm text-brand-red hover:text-brand-red/80 transition-colors"
                       >
                         <Smartphone className="w-4 h-4 flex-shrink-0" />
                         <EditableText
-                          value={member.mobile}
+                          value={member.mobile || ''}
                           onSave={(v) => updateMember(member.id, 'mobile', v)}
                           className="text-brand-red"
                         />
