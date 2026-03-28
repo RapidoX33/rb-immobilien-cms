@@ -29,10 +29,6 @@ export default function Objekte() {
   const initialTab = (searchParams.get('typ') as TabType) || 'mieten';
   const [activeTab, setActiveTab] = useState<TabType>(initialTab);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const switchTab = (tab: TabType) => {
     setActiveTab(tab);
     setSearchParams({ typ: tab });

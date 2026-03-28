@@ -76,10 +76,6 @@ export default function ObjektDetail() {
     updateProperty('images', newImages);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [id]);
-
   if (isLoading || !content) {
     return (
       <div className="min-h-screen flex items-center justify-center">

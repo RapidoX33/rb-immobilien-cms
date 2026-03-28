@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { MapPin, Home, Maximize, ArrowRight, Building2 } from 'lucide-react';
@@ -7,10 +6,6 @@ import { EditableText, EditableImage } from '../components/Editable';
 
 export default function Mietobjekte() {
   const { content, isLoading, handleSave } = useContent();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   if (isLoading || !content) {
     return (
