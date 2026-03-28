@@ -29,7 +29,20 @@ export default function Admin() {
   };
 
   return (
-    <div className="min-h-[60vh] flex items-center justify-center px-4 py-24">
+    <>
+    {/* Hero */}
+    <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center pt-24 bg-brand-dark">
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-dark via-brand-dark/95 to-brand-red/20" />
+      <div className="relative z-10 text-center text-white">
+        <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <Shield className="w-10 h-10 text-white" />
+        </div>
+        <h1 className="font-display text-5xl md:text-6xl font-bold">Administration</h1>
+        <p className="mt-4 text-xl text-white/70">Zugang zum Content-Management-System</p>
+      </div>
+    </section>
+
+    <section className="py-24 bg-brand-light -mt-8 rounded-t-[2.5rem] relative z-10 flex items-center justify-center px-4">
       <div className="max-w-md w-full mx-auto">
         <div className="bg-white p-8 rounded-3xl shadow-sm">
           <div className="text-center mb-8">
@@ -70,6 +83,7 @@ export default function Admin() {
           </form>
         </div>
       </div>
-    </div>
+    </section>
+    </>
   );
 }
