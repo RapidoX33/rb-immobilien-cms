@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Phone, Printer, Mail } from 'lucide-react';
 import { EditableText } from '../Editable';
 import { useContent } from '../../lib/contentContext';
 
@@ -69,24 +70,24 @@ export function Footer() {
               className="text-lg font-display font-semibold text-white"
             />
             <div className="text-gray-400 space-y-2">
-              <a href={`tel:${content.footerPhone}`} className="flex items-center gap-2 text-brand-red hover:text-brand-red/80 transition-colors">
-                <span>T</span>
+              <a href={`tel:${content.footerPhone}`} className="flex items-center gap-2 hover:text-brand-red/80 transition-colors">
+                <Phone className="w-4 h-4 text-brand-red flex-shrink-0" />
                 <EditableText
                   value={content.footerPhone}
                   onSave={(v) => handleSave('footerPhone', v)}
                   className="text-brand-red"
                 />
               </a>
-              <p className="flex items-center gap-2 text-brand-red">
-                <span>F</span>
+              <p className="flex items-center gap-2">
+                <Printer className="w-4 h-4 text-brand-red flex-shrink-0" />
                 <EditableText
                   value={content.footerFax}
                   onSave={(v) => handleSave('footerFax', v)}
                   className="text-brand-red"
                 />
               </p>
-              <a href={`mailto:${content.footerEmail}`} className="flex items-center gap-2 text-brand-red hover:text-brand-red/80 transition-colors">
-                <span>E</span>
+              <a href={`mailto:${content.footerEmail}`} className="flex items-center gap-2 hover:text-brand-red/80 transition-colors">
+                <Mail className="w-4 h-4 text-brand-red flex-shrink-0" />
                 <EditableText
                   value={content.footerEmail}
                   onSave={(v) => handleSave('footerEmail', v)}

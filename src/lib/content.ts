@@ -206,6 +206,7 @@ export interface SiteContent {
   datenschutzHeroImage: string;
   datenschutzPageTitle: string;
   datenschutzSourceText: string;
+  datenschutzSections: { title: string; content: string }[];
   datenschutzIntro: string;
   datenschutzUsage: string;
   datenschutzSecurity: string;
@@ -420,6 +421,7 @@ const defaultContent: SiteContent = {
   datenschutzHeroImage: 'https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
   datenschutzPageTitle: 'Datenschutzerklärung',
   datenschutzSourceText: 'Basierend auf dsat.ch',
+  datenschutzSections: [],
   datenschutzIntro: 'Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.',
   datenschutzUsage: 'Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.',
   datenschutzSecurity: 'Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.',

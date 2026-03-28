@@ -57,6 +57,17 @@ export default function Datenschutz() {
   const { content, handleSave } = useContent();
   if (!content) return null;
 
+  // Use saved sections from DB, fallback to hardcoded defaults
+  const activeSections = content.datenschutzSections && content.datenschutzSections.length > 0
+    ? content.datenschutzSections
+    : sections;
+
+  const updateSection = (index: number, field: 'title' | 'content', value: string) => {
+    const current = [...activeSections];
+    current[index] = { ...current[index], [field]: value };
+    handleSave('datenschutzSections', current);
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -97,14 +108,21 @@ export default function Datenschutz() {
             transition={{ duration: 0.6 }}
             className="bg-white p-8 md:p-12 rounded-3xl shadow-sm"
           >
-            {sections.map((section, index) => (
-              <div key={index} className={index < sections.length - 1 ? 'mb-10' : ''}>
-                <h2 className="text-xl md:text-2xl font-display font-bold text-brand-dark pb-4 border-b border-gray-200 mb-6">
-                  {section.title}
-                </h2>
-                <div className="text-brand-gray leading-relaxed whitespace-pre-line text-[15px]">
-                  {section.content}
-                </div>
+            {activeSections.map((section, index) => (
+              <div key={index} className={index < activeSections.length - 1 ? 'mb-10' : ''}>
+                <EditableText
+                  value={section.title}
+                  onSave={(v) => updateSection(index, 'title', v)}
+                  as="h2"
+                  className="text-xl md:text-2xl font-display font-bold text-brand-dark pb-4 border-b border-gray-200 mb-6"
+                />
+                <EditableText
+                  value={section.content}
+                  onSave={(v) => updateSection(index, 'content', v)}
+                  as="div"
+                  multiline
+                  className="text-brand-gray leading-relaxed text-[15px]"
+                />
               </div>
             ))}
 

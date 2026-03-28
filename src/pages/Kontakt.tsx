@@ -137,27 +137,33 @@ export default function Kontakt() {
                     as="p"
                     className="font-semibold text-brand-dark mb-1"
                   />
-                  <a href={`tel:${content.phone}`} className="flex items-center gap-1 text-brand-red hover:text-brand-red/80 transition-colors">
+                  <p className="flex items-center gap-1">
                     <EditableText
                       value={content.kontaktTelPrefix}
                       onSave={(v) => handleSave('kontaktTelPrefix', v)}
+                      className="text-brand-gray"
                     />{' '}
-                    <EditableText
-                      value={content.phone}
-                      onSave={(v) => handleSave('phone', v)}
-                      className="text-brand-red"
-                    />
-                  </a>
-                  <p className="text-brand-red">
+                    <a href={`tel:${content.phone}`} className="text-brand-red hover:text-brand-red/80">
+                      <EditableText
+                        value={content.phone}
+                        onSave={(v) => handleSave('phone', v)}
+                        className="text-brand-red"
+                      />
+                    </a>
+                  </p>
+                  <p className="flex items-center gap-1">
                     <EditableText
                       value={content.kontaktFaxPrefix}
                       onSave={(v) => handleSave('kontaktFaxPrefix', v)}
+                      className="text-brand-gray"
                     />{' '}
-                    <EditableText
-                      value={content.fax}
-                      onSave={(v) => handleSave('fax', v)}
-                      className="text-brand-red"
-                    />
+                    <span className="text-brand-red">
+                      <EditableText
+                        value={content.fax}
+                        onSave={(v) => handleSave('fax', v)}
+                        className="text-brand-red"
+                      />
+                    </span>
                   </p>
                 </div>
               </div>

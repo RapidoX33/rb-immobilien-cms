@@ -84,23 +84,29 @@ export default function Impressum() {
                     <EditableText
                       value={content.impressumTelPrefix}
                       onSave={(v) => handleSave('impressumTelPrefix', v)}
-                    />{' '}
-                    <EditableText
-                      value={content.footerPhone}
-                      onSave={(v) => handleSave('footerPhone', v)}
                       className="text-brand-gray"
-                    />
+                    />{' '}
+                    <a href={`tel:${content.footerPhone}`} className="text-brand-red hover:text-brand-red/80">
+                      <EditableText
+                        value={content.footerPhone}
+                        onSave={(v) => handleSave('footerPhone', v)}
+                        className="text-brand-red"
+                      />
+                    </a>
                   </p>
                   <p className="flex items-center gap-1">
                     <EditableText
                       value={content.impressumFaxPrefix}
                       onSave={(v) => handleSave('impressumFaxPrefix', v)}
-                    />{' '}
-                    <EditableText
-                      value={content.footerFax}
-                      onSave={(v) => handleSave('footerFax', v)}
                       className="text-brand-gray"
-                    />
+                    />{' '}
+                    <span className="text-brand-red">
+                      <EditableText
+                        value={content.footerFax}
+                        onSave={(v) => handleSave('footerFax', v)}
+                        className="text-brand-red"
+                      />
+                    </span>
                   </p>
                   <p>
                     <EditableText
